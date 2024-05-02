@@ -25,7 +25,7 @@ public class Reimbursement {
     private String description;
 
 
-    private Float amount;
+    private float amount;
 
     @Enumerated(EnumType.STRING)
     private Utilities.Status status;
@@ -40,11 +40,20 @@ public class Reimbursement {
         return description;
     }
 
+    public Reimbursement(String description, float amount, Utilities.Status status, Employee employee) {
+        this.description = description;
+        this.amount = amount;
+        this.status = status;
+        this.employee = employee;
+    }
+
+// Getters & Setters
+
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public Float getAmount() {
+    public float getAmount() {
         return amount;
     }
 
@@ -67,4 +76,6 @@ public class Reimbursement {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
+
+
 }

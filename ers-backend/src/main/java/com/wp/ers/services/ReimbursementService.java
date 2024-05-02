@@ -1,8 +1,11 @@
 package com.wp.ers.services;
 
+import com.wp.ers.DTOs.IncomingReimbursementDTO;
 import com.wp.ers.DTOs.OutgoingReimbursementDTO;
 import com.wp.ers.models.Reimbursement;
+import com.wp.ers.repositories.EmployeeRepository;
 import com.wp.ers.repositories.ReimbursementRepository;
+import com.wp.ers.utilities.Utilities;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +21,23 @@ public class ReimbursementService {
 
     @Autowired
     private ReimbursementRepository reimbursementRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
-    public Reimbursement addReimbursement(Reimbursement reimbursement) {
-        return reimbursementRepository.save(reimbursement);
+    public Reimbursement addReimbursement(
+            IncomingReimbursementDTO reimbursementInput,
+            int employeeId) {
+
+        Reimbursement reimbursement = new Reimbursement(
+                reimbursementInput.description(),
+                reimbursementInput.amount(),
+                Utilities.Status.pending,
+                employeeRepository.findById(employeeId).get()
+        );
+        Reimbursement reimbursementAdded =  reimbursementRepository.save(reimbursement);
+
+        return reimbursementAdded;
+
     }
 
     public List<OutgoingReimbursementDTO> listReimbursements() {

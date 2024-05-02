@@ -1,5 +1,6 @@
 package com.wp.ers.controllers;
 
+import com.wp.ers.DTOs.IncomingReimbursementDTO;
 import com.wp.ers.DTOs.OutgoingReimbursementDTO;
 import com.wp.ers.models.Reimbursement;
 import com.wp.ers.services.ReimbursementService;
@@ -22,9 +23,11 @@ public class ReimbursementController {
     private ReimbursementService reimbursementService;
 
 
-    @PostMapping()
-    public ResponseEntity<Reimbursement> addReimbursement(@RequestBody Reimbursement reimbursement) {
-        Reimbursement newReimbursement = reimbursementService.addReimbursement(reimbursement);
+    @PostMapping("/employees/{employeeId}")
+    public ResponseEntity<Reimbursement> addReimbursement(
+            @RequestBody IncomingReimbursementDTO reimbursement,
+            @PathVariable int employeeId) {
+        Reimbursement newReimbursement = reimbursementService.addReimbursement(reimbursement, employeeId);
         return ResponseEntity.accepted().body(newReimbursement);
     }
 
