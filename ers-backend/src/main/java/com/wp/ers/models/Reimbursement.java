@@ -1,4 +1,4 @@
-package com.wp.ERS.models;
+package com.wp.ers.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -39,5 +39,5 @@ public class Reimbursement {
     // setup foreign key
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    private com.wp.ERS.models.Employee employee;
+    private Employee employee;
 }

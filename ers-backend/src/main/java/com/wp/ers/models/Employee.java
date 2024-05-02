@@ -1,4 +1,4 @@
-package com.wp.ERS.models;
+package com.wp.ers.models;
 
 
 import jakarta.persistence.*;
