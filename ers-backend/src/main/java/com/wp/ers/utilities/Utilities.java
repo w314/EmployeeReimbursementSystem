@@ -11,4 +11,10 @@ public class Utilities {
         associate,
         manager
     }
+
+    public enum Status {
+        pending,
+        approved,
+        denied
+    }
 }

@@ -1,5 +1,6 @@
 package com.wp.ers.controllers;
 
+import com.wp.ers.DTOs.OutgoingReimbursementDTO;
 import com.wp.ers.models.Reimbursement;
 import com.wp.ers.services.ReimbursementService;
 import lombok.AllArgsConstructor;
@@ -22,15 +23,21 @@ public class ReimbursementController {
 
 
     @PostMapping()
-    public ResponseEntity<Reimbursement> addReibursement(@RequestBody Reimbursement reimbursement) {
+    public ResponseEntity<Reimbursement> addReimbursement(@RequestBody Reimbursement reimbursement) {
         Reimbursement newReimbursement = reimbursementService.addReimbursement(reimbursement);
         return ResponseEntity.accepted().body(newReimbursement);
     }
 
     @GetMapping()
-    public ResponseEntity<List<Reimbursement>> getAllReimbursements() {
-        List<Reimbursement> reimbursements = reimbursementService.listReimbursements();
+    public ResponseEntity<List<OutgoingReimbursementDTO>> getAllReimbursements() {
+        List<OutgoingReimbursementDTO> reimbursements = reimbursementService.listReimbursements();
         return ResponseEntity.ok().body(reimbursements);
 
+    }
+
+    @GetMapping("/{reimbursementId}")
+    public ResponseEntity<Reimbursement> getReimbursementById(@PathVariable int reimbursementId) {
+        Reimbursement reimbursement =  reimbursementService.getReimbursementById(reimbursementId);
+        return ResponseEntity.ok().body(reimbursement);
     }
 }
