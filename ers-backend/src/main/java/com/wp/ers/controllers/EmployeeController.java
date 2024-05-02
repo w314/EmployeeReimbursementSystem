@@ -1,5 +1,6 @@
 package com.wp.ers.controllers;
 
+import com.wp.ers.DTOs.OutgoingEmployeeDTO;
 import com.wp.ers.models.Employee;
 import com.wp.ers.services.EmployeeService;
 import lombok.AllArgsConstructor;
@@ -23,8 +24,8 @@ public class EmployeeController {
 
 
     @GetMapping
-    public ResponseEntity<List<Employee>> getAllEmployees() {
-        List<Employee> employees = employeeService.listAllEmployees();
+    public ResponseEntity<List<OutgoingEmployeeDTO>> getAllEmployees() {
+        List<OutgoingEmployeeDTO> employees = employeeService.listAllEmployees();
         return ResponseEntity.ok().body(employees);
     }
 
