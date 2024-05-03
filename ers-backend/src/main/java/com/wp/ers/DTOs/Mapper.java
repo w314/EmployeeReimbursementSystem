@@ -32,6 +32,7 @@ public class Mapper {
 
     public ReimbursementDTO toReimbursementDTO(Reimbursement reimbursement) {
         return  new ReimbursementDTO(
+                reimbursement.getReimbursementId(),
                 reimbursement.getDescription(),
                 reimbursement.getAmount(),
                 reimbursement.getStatus(),

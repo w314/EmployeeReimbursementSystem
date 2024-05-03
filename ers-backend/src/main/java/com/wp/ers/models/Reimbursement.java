@@ -49,6 +49,15 @@ public class Reimbursement {
 
 // Getters & Setters
 
+
+    public int getReimbursementId() {
+        return reimbursementId;
+    }
+
+    public void setReimbursementId(int reimbursementId) {
+        this.reimbursementId = reimbursementId;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }

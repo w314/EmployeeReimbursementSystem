@@ -1,16 +1,11 @@
 import * as React from "react"
-
-type Reimbursement = {
-    description: string;
-    amount: number;
-    status: string;
-}
+import { ReimbursementType } from "../Utilities/Types";
 
 const Reimbursement: React.FC<{
-    reimbursement: Reimbursement
+    reimbursement: ReimbursementType
 }> = ({reimbursement}) => {
 
-    const {description, amount, status} = reimbursement;
+    const {id, description, amount, status} = reimbursement;
 
     return (
 

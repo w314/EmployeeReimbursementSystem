@@ -2,21 +2,21 @@ import { Link } from "react-router-dom";
 import { fetchData } from "../Utilities/fetchData."
 import * as React from "react"
 import Reimbursement from "./Reimbursement";
+import { ReimbursementType } from "../Utilities/Types";
 
 
 
 const ReimbursementList: React.FC<{}> = () => {
 
-    const [ reimbursements, setReimbursements ] = React.useState([])
+    const [ reimbursements, setReimbursements ] = React.useState([] as ReimbursementType[])
     const [ status, setStatus ] = React.useState("all");
+
 
     const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         event.preventDefault();
-
         setStatus(event.target.value);
-
-        console.log(status);
     }
+
 
     const setUrl = () => {
 
@@ -40,8 +40,6 @@ const ReimbursementList: React.FC<{}> = () => {
         const handleGetReimbursements = async () => {
             const url = setUrl();
             const res  = await fetchData(url);
-            // console.log("in reimbursements")
-            // console.log(res);
             if(res?.response) {
                 setReimbursements(res.response);
             }          
@@ -61,7 +59,7 @@ const ReimbursementList: React.FC<{}> = () => {
             <p>current status: {status}</p>
             <ul>
                 {reimbursements.map(reimb => (
-                    <li>< Reimbursement reimbursement={reimb} /></li>
+                    <li key={reimb.id}>< Reimbursement reimbursement={reimb} /></li>
                 ))}
             </ul>
         </>
