@@ -50,4 +50,10 @@ public class ReimbursementController {
         List<ReimbursementDTO> reimbursements = reimbursementService.getReimbursementsByStatus(status);
         return ResponseEntity.ok().body(reimbursements);
     }
+
+    @PatchMapping("/{reimbursementId}/status/{status}")
+    public ResponseEntity<Reimbursement> updateReimbursementStatus(@PathVariable int reimbursementId, @PathVariable Utilities.Status status) {
+        Reimbursement reimbursement = reimbursementService.updateReimbursementStatus(reimbursementId, status);
+        return ResponseEntity.ok().body(reimbursement);
+    }
 }

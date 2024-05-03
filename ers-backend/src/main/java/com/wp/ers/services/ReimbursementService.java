@@ -61,8 +61,16 @@ public class ReimbursementService {
                 .stream()
                 .map(reimbursement -> mapper.toReimbursementDTO(reimbursement))
                 .toList();
-
         return reimbursementDTOs;
+    }
 
+    public Reimbursement updateReimbursementStatus(int reimbursementId, Utilities.Status status) {
+        Reimbursement reimbursement = reimbursementRepository.findById(reimbursementId).get();
+        System.out.println(reimbursement);
+        System.out.println("IN SERVICE");
+
+        reimbursement.setStatus(status);
+        Reimbursement updatedReimbursement = reimbursementRepository.save(reimbursement);
+        return updatedReimbursement;
     }
 }
