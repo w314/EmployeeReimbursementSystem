@@ -4,6 +4,7 @@ import com.wp.ers.DTOs.ReimbursemenCreationtDTO;
 import com.wp.ers.DTOs.ReimbursementDTO;
 import com.wp.ers.models.Reimbursement;
 import com.wp.ers.services.ReimbursementService;
+import com.wp.ers.utilities.Utilities;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,11 @@ public class ReimbursementController {
     public ResponseEntity<Reimbursement> getReimbursementById(@PathVariable int reimbursementId) {
         Reimbursement reimbursement =  reimbursementService.getReimbursementById(reimbursementId);
         return ResponseEntity.ok().body(reimbursement);
+    }
+
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<ReimbursementDTO>> getReimbursementsByStatus(@PathVariable Utilities.Status status) {
+        List<ReimbursementDTO> reimbursements = reimbursementService.getReimbursementsByStatus(status);
+        return ResponseEntity.ok().body(reimbursements);
     }
 }

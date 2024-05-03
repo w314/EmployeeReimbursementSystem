@@ -6,6 +6,7 @@ import com.wp.ers.DTOs.ReimbursementDTO;
 import com.wp.ers.models.Reimbursement;
 import com.wp.ers.repositories.EmployeeRepository;
 import com.wp.ers.repositories.ReimbursementRepository;
+import com.wp.ers.utilities.Utilities;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,17 +45,7 @@ public class ReimbursementService {
                 .stream()
                 .map(reimbursement -> mapper.toReimbursementDTO(reimbursement))
                 .toList();
-//
-//        for(Reimbursement reimbursementData : reimbursementsData) {
-//            ReimbursementDTO reimbursement = new ReimbursementDTO(
-//                    reimbursementData.getDescription(),
-//                    reimbursementData.getAmount(),
-//                    reimbursementData.getStatus(),
-//                    reimbursementData.getEmployee().getFirstName() + " " + reimbursementData.getEmployee().getLastName()
-//            );
-//            reimbursements.add(reimbursement);
-//        }
-//
+
         return reimbursements;
     }
 
@@ -63,10 +54,15 @@ public class ReimbursementService {
         return reimbursementRepository.findById(reimbursementId).get();
     }
 
-//
-//    public List<OutgoingReimbursementDTO> getReimbursementsByStatus(String status) {
-//        List<Reimbursement> reimbursements = reimbursementRepository.findByStatus(status);
-//
-//
-//    }
+
+    public List<ReimbursementDTO> getReimbursementsByStatus(Utilities.Status status) {
+        List<Reimbursement> reimbursements = reimbursementRepository.findByStatus(status);
+        List<ReimbursementDTO> reimbursementDTOs = reimbursements
+                .stream()
+                .map(reimbursement -> mapper.toReimbursementDTO(reimbursement))
+                .toList();
+
+        return reimbursementDTOs;
+
+    }
 }
