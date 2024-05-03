@@ -2,7 +2,7 @@ package com.wp.ers.DTOs;
 
 import com.wp.ers.utilities.Utilities;
 
-public record IncomingEmployeeDTO (
+public record EmployeeCreationDTO(
     String firstName,
     String lastName,
     String userName,

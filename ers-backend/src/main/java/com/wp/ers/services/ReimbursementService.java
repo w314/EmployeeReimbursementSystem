@@ -1,11 +1,11 @@
 package com.wp.ers.services;
 
-import com.wp.ers.DTOs.IncomingReimbursementDTO;
-import com.wp.ers.DTOs.OutgoingReimbursementDTO;
+import com.wp.ers.DTOs.Mapper;
+import com.wp.ers.DTOs.ReimbursemenCreationtDTO;
+import com.wp.ers.DTOs.ReimbursementDTO;
 import com.wp.ers.models.Reimbursement;
 import com.wp.ers.repositories.EmployeeRepository;
 import com.wp.ers.repositories.ReimbursementRepository;
-import com.wp.ers.utilities.Utilities;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,38 +23,38 @@ public class ReimbursementService {
     private ReimbursementRepository reimbursementRepository;
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
+    private Mapper mapper;
 
     public Reimbursement addReimbursement(
-            IncomingReimbursementDTO reimbursementInput,
+            ReimbursemenCreationtDTO reimbursementInput,
             int employeeId) {
 
-        Reimbursement reimbursement = new Reimbursement(
-                reimbursementInput.description(),
-                reimbursementInput.amount(),
-                Utilities.Status.pending,
-                employeeRepository.findById(employeeId).get()
-        );
+        Reimbursement reimbursement = mapper.toReimbursement(reimbursementInput, employeeId);
         Reimbursement reimbursementAdded =  reimbursementRepository.save(reimbursement);
 
         return reimbursementAdded;
 
     }
 
-    public List<OutgoingReimbursementDTO> listReimbursements() {
+    public List<ReimbursementDTO> listReimbursements() {
         List<Reimbursement> reimbursementsData = reimbursementRepository.findAll();
 
-        List<OutgoingReimbursementDTO> reimbursements = new ArrayList<>();
-
-        for(Reimbursement reimbursementData : reimbursementsData) {
-            OutgoingReimbursementDTO reimbursement = new OutgoingReimbursementDTO(
-                    reimbursementData.getDescription(),
-                    reimbursementData.getAmount(),
-                    reimbursementData.getStatus(),
-                    reimbursementData.getEmployee().getFirstName() + " " + reimbursementData.getEmployee().getLastName()
-            );
-            reimbursements.add(reimbursement);
-        }
-
+        List<ReimbursementDTO> reimbursements = reimbursementsData
+                .stream()
+                .map(reimbursement -> mapper.toReimbursementDTO(reimbursement))
+                .toList();
+//
+//        for(Reimbursement reimbursementData : reimbursementsData) {
+//            ReimbursementDTO reimbursement = new ReimbursementDTO(
+//                    reimbursementData.getDescription(),
+//                    reimbursementData.getAmount(),
+//                    reimbursementData.getStatus(),
+//                    reimbursementData.getEmployee().getFirstName() + " " + reimbursementData.getEmployee().getLastName()
+//            );
+//            reimbursements.add(reimbursement);
+//        }
+//
         return reimbursements;
     }
 
@@ -62,4 +62,11 @@ public class ReimbursementService {
     public Reimbursement getReimbursementById(int reimbursementId) {
         return reimbursementRepository.findById(reimbursementId).get();
     }
+
+//
+//    public List<OutgoingReimbursementDTO> getReimbursementsByStatus(String status) {
+//        List<Reimbursement> reimbursements = reimbursementRepository.findByStatus(status);
+//
+//
+//    }
 }

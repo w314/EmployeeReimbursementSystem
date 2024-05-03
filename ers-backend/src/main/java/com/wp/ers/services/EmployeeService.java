@@ -1,6 +1,7 @@
 package com.wp.ers.services;
 
-import com.wp.ers.DTOs.OutgoingEmployeeDTO;
+import com.wp.ers.DTOs.EmployeeDTO;
+import com.wp.ers.DTOs.Mapper;
 import com.wp.ers.models.Employee;
 import com.wp.ers.repositories.EmployeeRepository;
 import lombok.AllArgsConstructor;
@@ -16,25 +17,21 @@ public class EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
+    private Mapper mapper;
 
     public Employee addEmployee(Employee employee) {
         return employeeRepository.save(employee);
-
     }
 
-    public List<OutgoingEmployeeDTO> listAllEmployees() {
+
+    public List<EmployeeDTO> listAllEmployees() {
 
         List<Employee> employeesData = employeeRepository.findAll();
-        List<OutgoingEmployeeDTO> employees = new ArrayList<>();
-        for(Employee employeeData : employeesData) {
-            OutgoingEmployeeDTO employee = new OutgoingEmployeeDTO(
-                employeeData.getFirstName(),
-                employeeData.getLastName(),
-                employeeData.getRole()
-            );
-            employees.add(employee);
-        }
+        return employeesData
+                .stream()
+                .map(employee -> mapper.toEmployeeDTO(employee))
+                .toList();
 
-        return employees;
     }
 }

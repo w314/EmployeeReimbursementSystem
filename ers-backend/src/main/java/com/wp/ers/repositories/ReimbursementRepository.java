@@ -15,5 +15,5 @@ public interface ReimbursementRepository extends JpaRepository<Reimbursement, In
     // based on conventions and provides a wide range of database operations out of the box,
     // reducing the need for boilerplate code.
 
-//    public List<Reimbursement> findByEmployeeId(int employeeId);
+//    public List<Reimbursement> findByStatus(String status);
 }
