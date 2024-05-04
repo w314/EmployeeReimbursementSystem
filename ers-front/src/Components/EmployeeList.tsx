@@ -1,5 +1,5 @@
 import * as React from "react";
-import { fetchData } from "../Utilities/fetchData.";
+import { fetchData } from "../Utilities/Utilities";
 
 const EmployeeList: React.FC<{}> = () => {
 
