@@ -17,4 +17,9 @@ public class Utilities {
         approved,
         denied
     }
+
+//    public interface LoginRequestBody {
+//        private String username;
+//        private String password;
+//    }
 }

@@ -15,6 +15,7 @@ public class Mapper {
 
     public EmployeeDTO toEmployeeDTO (Employee employee) {
         return new EmployeeDTO(
+                employee.getEmployeeId(),
                 employee.getFirstName(),
                 employee.getLastName(),
                 employee.getRole()

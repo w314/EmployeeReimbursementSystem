@@ -35,4 +35,18 @@ public class EmployeeService {
     }
 
 
+    public EmployeeDTO login(String username, String password) {
+
+        Employee employee = employeeRepository.findByUserName(username);
+
+        if(employee == null) return null;
+
+        if(employee.getPassword().equals(password)) {
+            return mapper.toEmployeeDTO(employee);
+        }
+
+        return null;
+    }
+
+
 }

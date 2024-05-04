@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/reimbursements")  // maps controller to the /reimburement URI path
 @Controller // makes it a bean
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class ReimbursementController {
 
     @Autowired // injects the depencency
