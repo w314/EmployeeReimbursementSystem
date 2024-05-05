@@ -2,6 +2,7 @@ import * as React from "react"
 import { Link, Navigate } from "react-router-dom"
 import Header from "./Header/Header"
 import { EmployeeType } from "../Utilities/Types"
+import ReimbursementList from "./ReimbursementList/ReimbursementList"
 
 
 const ManagerPage: React.FC<{
@@ -28,6 +29,7 @@ const ManagerPage: React.FC<{
                 {/* <button onClick={handleClick} id="employees">Employees</button> */}
                 {/* <button onClick={handleClick} id="reimbursements">Reimbursements</button> */}
             {/* </nav> */}
+            <ReimbursementList employee={employee} />
         </>
     )
 }

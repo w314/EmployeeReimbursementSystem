@@ -1,6 +1,6 @@
 import { baseUrl, fetchData } from "../../Utilities/Utilities"
 import * as React from "react"
-import Reimbursement from "../Reimbursement";
+import Reimbursement from "../Reimbursement/Reimbursement";
 import { ReimbursementType, RoleEnum, StatusEnum, EmployeeType } from "../../Utilities/Types";
 import { useNavigate } from "react-router-dom";
 import InvalidCredentials from "../InvalidCredentials";

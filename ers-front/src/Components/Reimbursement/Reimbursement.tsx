@@ -1,8 +1,9 @@
 import * as React from "react"
-import { ReimbursementType, RoleEnum, StatusEnum } from "../Utilities/Types";
-import { baseUrl } from "../Utilities/Utilities";
+import { ReimbursementType, RoleEnum, StatusEnum } from "../../Utilities/Types";
+import { baseUrl } from "../../Utilities/Utilities";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import "./Reimbursement.css"
 
 const Reimbursement: React.FC<{
     reimbursement: ReimbursementType,
@@ -55,43 +56,44 @@ const Reimbursement: React.FC<{
     }
 
     return (
+        <div className="reimbursement">
+            <div  className="details">
+                <span className="rowFlex" hidden={loggedInUserRole == RoleEnum.associate}>
+                    {/* <Link to={`${baseUrl}/reimbursements/employees/${reimbursement.employeeId}`}>{reimbursement.employee}</Link> */}
+                    <label htmlFor="employee">Submitted By:</label>
+                    <span id="employee">{reimbursement.employee}</span>
+                </span>
+                <span className="rowFlex">
+                    <label htmlFor="status">Status: </label>
+                    <span className={`${reimbursement.status} bolder`}>{reimbursement.status.toLocaleUpperCase()}</span>
+                </span>
+                <div>
+                    <label htmlFor="description"></label>
+                    <button hidden={loggedInUserRole == RoleEnum.manager || reimbursement.status != StatusEnum.pending}>edit</button>
 
-        <>
-        <div>
-            <div>
-                <span>{reimbursement.description} </span>
+                    <span id="description">{reimbursement.description} </span>
+                </div>
+                <p>{reimbursement.amount}</p>
+            </div>
+            <div className="buttons">
                 <button 
-                    hidden={loggedInUserRole == RoleEnum.manager || reimbursement.status != StatusEnum.pending}>edit</button>
+                    className={reimbursement.status == StatusEnum.pending ? "approved" : ""}
+                    onClick={handleStatusButtonClick} 
+                    disabled={reimbursement.status != StatusEnum.pending}
+                    hidden={loggedInUserRole == RoleEnum.associate}
+                    id="approved">
+                    Approve
+                </button>
+                <button 
+                    className={reimbursement.status == StatusEnum.pending ? "denied" : ""}
+                    onClick={handleStatusButtonClick} 
+                    disabled={reimbursement.status != StatusEnum.pending} 
+                    hidden={loggedInUserRole == RoleEnum.associate}
+                    id="denied">
+                    Deny
+                </button>
             </div>
-            <p>{reimbursement.amount}</p>
-            <p>{reimbursement.status}</p>
-            <div 
-                hidden={loggedInUserRole == RoleEnum.associate}
-            >
-                {/* <Link to={`${baseUrl}/reimbursements/employees/${reimbursement.employeeId}`}>{reimbursement.employee}</Link> */}
-                <p>{reimbursement.employee}</p>
-                
-            </div>
-            <p>{JSON.stringify(reimbursement)}</p>
         </div>
-        <div>
-            <button 
-                onClick={handleStatusButtonClick} 
-                disabled={reimbursement.status != StatusEnum.pending}
-                hidden={loggedInUserRole == RoleEnum.associate}
-                id="approved">
-                approve
-            </button>
-            <button 
-                onClick={handleStatusButtonClick} 
-                disabled={reimbursement.status != StatusEnum.pending} 
-                hidden={loggedInUserRole == RoleEnum.associate}
-                id="denied">
-                deny
-            </button>
-        </div>
-        <hr></hr>
-        </>
     )
 }
 

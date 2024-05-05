@@ -7,6 +7,7 @@ import ManagerPage from "../ManagerPage"
 import EmployeePage from "../EmployeePage"
 import Header from "../Header/Header"
 import "./Login.css"
+import ReimbursementList from "../ReimbursementList/ReimbursementList"
 
 const Login: React.FC<{}> = () => {
 
@@ -82,9 +83,10 @@ const Login: React.FC<{}> = () => {
 
         )
         // if the user is logged in the page rendered is based on their role
-        : loggedInUser.role == RoleEnum.manager
-            ? < ManagerPage employee={loggedInUser}/>
-            : < EmployeePage employee={loggedInUser} />
+        // : loggedInUser.role == RoleEnum.manager
+        //     ? < ManagerPage employee={loggedInUser}/>
+        //     : < EmployeePage employee={loggedInUser} />
+        : <ReimbursementList employee={loggedInUser} />
     
 }
 

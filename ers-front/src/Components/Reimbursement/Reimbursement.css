@@ -1,0 +1,59 @@
+.reimbursement {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    align-items: flex-start;
+}
+
+ul {
+    width: 100%;
+}
+
+li {
+    list-style-type: none;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
+
+.buttons button {
+    width: 60%;
+
+}
+
+.rowFlex {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+label {
+    margin-right: 10px;
+}
+
+.approved {
+    color: green;
+
+}
+
+.denied {
+    color: red;
+
+}
+
+.pending {
+    color: blue;
+}
+
+.bolder {
+    font-weight: 500;
+}

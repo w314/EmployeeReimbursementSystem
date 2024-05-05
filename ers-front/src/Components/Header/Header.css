@@ -19,7 +19,7 @@ div {
 nav {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
 }
 
 h1 {
@@ -34,4 +34,5 @@ h1 {
 
 button {
     padding: 5px;
+    margin-right: 20px;
 }
