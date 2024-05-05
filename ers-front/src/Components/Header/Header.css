@@ -1,9 +1,10 @@
-.title {
+.headerTitle {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     /* keeps logout button not streched */
     align-items: center;   
+    width: 100%;
 }
 
 h1 {

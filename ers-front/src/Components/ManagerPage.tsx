@@ -3,6 +3,7 @@ import { Link, Navigate } from "react-router-dom"
 import Header from "./Header/Header"
 import { EmployeeType } from "../Utilities/Types"
 import ReimbursementList from "./ReimbursementList/ReimbursementList"
+import Navigation from "./Navigation/Navigation"
 
 
 const ManagerPage: React.FC<{
@@ -22,13 +23,17 @@ const ManagerPage: React.FC<{
 
     return  (
         <div className="content">
+            <div className="header">
              <Header employee={employee} />
+             <Navigation employee={employee}/>
             {/* <nav> */}
                 {/* <Link to="/employees">Employees</Link> */}
                 {/* <Link to="/reimbursements">Reimbursements</Link> */}
                 {/* <button onClick={handleClick} id="employees">Employees</button> */}
                 {/* <button onClick={handleClick} id="reimbursements">Reimbursements</button> */}
             {/* </nav> */}
+
+            </div>
             <ReimbursementList employee={employee} />
         </div>
     )

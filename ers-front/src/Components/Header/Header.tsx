@@ -16,7 +16,7 @@ const Header: React.FC<{
  
 
     return (
-        <div className="title">
+        <div className="headerTitle">
             <h1>Employee Reimbursement System</h1>
             <button 
                 onClick={handleLogoutClick}

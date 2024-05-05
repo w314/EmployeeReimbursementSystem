@@ -81,11 +81,11 @@ const ReimbursementList: React.FC<{
     // ? (
     return (
         <div className="content">  
-            <div  hidden={employee.role == RoleEnum.associate}>
+            {/* <div  hidden={employee.role == RoleEnum.associate}>
             < Header 
                 employee={employee}          />
 
-            </div>
+            </div> */}
             <div className="title">
                 <h2>Reimbursements</h2>
                 <select onChange={handleStatusFilterChange}>
