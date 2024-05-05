@@ -19,8 +19,10 @@ import java.util.List;
 @NoArgsConstructor
 @Controller // makes it a bean
 @RequestMapping("/employees") // maps URI to controller
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+//@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin
 public class EmployeeController {
+
 
     @Autowired
     private EmployeeService employeeService;
