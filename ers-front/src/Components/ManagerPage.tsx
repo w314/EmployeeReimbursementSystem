@@ -21,7 +21,7 @@ const ManagerPage: React.FC<{
     // }
 
     return  (
-        <>
+        <div className="content">
              <Header employee={employee} />
             {/* <nav> */}
                 {/* <Link to="/employees">Employees</Link> */}
@@ -30,7 +30,7 @@ const ManagerPage: React.FC<{
                 {/* <button onClick={handleClick} id="reimbursements">Reimbursements</button> */}
             {/* </nav> */}
             <ReimbursementList employee={employee} />
-        </>
+        </div>
     )
 }
 
