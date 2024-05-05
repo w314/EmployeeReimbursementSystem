@@ -40,12 +40,20 @@ public class Reimbursement {
         return description;
     }
 
+
+    // constructors
+
+
+    public Reimbursement() {
+    }
+
     public Reimbursement(String description, float amount, Utilities.Status status, Employee employee) {
         this.description = description;
         this.amount = amount;
         this.status = status;
         this.employee = employee;
     }
+
 
 // Getters & Setters
 

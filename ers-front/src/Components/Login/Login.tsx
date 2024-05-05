@@ -31,8 +31,7 @@ const Login: React.FC<{}> = () => {
         const url = `${baseUrl}employees/login`
         const { data, status } = await axios.post<EmployeeType>(
             url,
-            {...userCredentials},
-            {withCredentials: true}
+            {...userCredentials}
         );
         
         console.log(JSON.stringify(data, null, 4));        
