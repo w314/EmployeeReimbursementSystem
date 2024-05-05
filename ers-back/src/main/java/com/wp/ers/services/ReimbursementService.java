@@ -28,13 +28,14 @@ public class ReimbursementService {
     @Autowired
     private Mapper mapper;
 
-    public Reimbursement addReimbursement(
+    public ReimbursementDTO addReimbursement(
             ReimbursemenCreationtDTO reimbursementInput) {
 
         Reimbursement reimbursement = mapper.toReimbursement(reimbursementInput);
         Reimbursement reimbursementAdded =  reimbursementRepository.save(reimbursement);
+        ReimbursementDTO addedReimbusementDTO = mapper.toReimbursementDTO(reimbursementAdded);
 
-        return reimbursementAdded;
+        return addedReimbusementDTO;
 
     }
 

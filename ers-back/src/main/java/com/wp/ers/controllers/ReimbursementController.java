@@ -27,10 +27,10 @@ public class ReimbursementController {
 
 
     @PostMapping()
-    public ResponseEntity<Reimbursement> addReimbursement(
+    public ResponseEntity<ReimbursementDTO> addReimbursement(
             @RequestBody ReimbursemenCreationtDTO reimbursement) {
-        Reimbursement newReimbursement = reimbursementService.addReimbursement(reimbursement);
-        return ResponseEntity.accepted().body(newReimbursement);
+        ReimbursementDTO newReimbursementDTO = reimbursementService.addReimbursement(reimbursement);
+        return ResponseEntity.accepted().body(newReimbursementDTO);
     }
 
     @GetMapping()
