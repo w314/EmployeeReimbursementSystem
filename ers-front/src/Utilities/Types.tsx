@@ -28,10 +28,10 @@ export type ReimbursementInputType = {
 }
 
 export type EmployeeType = {
-    employeeId: number,
-    firstName: string,
-    lastName: string,
-    role: RoleEnum,
+    employeeId: number;
+    firstName: string;
+    lastName: string;
+    role: RoleEnum;
 }
 
 

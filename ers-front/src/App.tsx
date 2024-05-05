@@ -8,7 +8,7 @@ import ManagerPage from './Components/ManagerPage';
 import Login from './Components/Login/Login';
 import EmployeePage from './Components/EmployeePage/EmployeePage';
 import Header from './Components/Header/Header';
-import AddReimbursement from './Components/Reimbursement/AddReimbursement';
+import AddReimbursement from './Components/AddReimbursement/AddReimbursement';
 
 
 function App() {

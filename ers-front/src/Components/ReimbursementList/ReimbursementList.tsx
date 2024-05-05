@@ -50,6 +50,14 @@ const ReimbursementList: React.FC<{
         setReimbursements(updatedReimbursements as ReimbursementType[]);
     }
 
+    const handleAddReimbursementClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        navigate("/reimbursements/addReimbursement", {
+            state: {
+                employee: employee
+            }
+        })
+    }
+
 
     React.useEffect(() => {
         console.log('fetching reimbursements')
@@ -86,6 +94,10 @@ const ReimbursementList: React.FC<{
                     <option value="approved">Approved</option>
                     <option value="denied">Denied</option>
                 </select>
+                <button 
+                    hidden={loggedInUserRole=="manager"}
+                    onClick={handleAddReimbursementClick}
+                >Add Reimbursement</button>
             </div>
             {/* render list of reimbursements */}
             <ul>

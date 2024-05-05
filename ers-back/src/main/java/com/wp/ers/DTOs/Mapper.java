@@ -22,12 +22,13 @@ public class Mapper {
         );
     }
 
-    public Reimbursement toReimbursement (ReimbursemenCreationtDTO reimbursementInput, int employeeId) {
+    public Reimbursement toReimbursement (ReimbursemenCreationtDTO reimbursementInput) {
         return new Reimbursement(
                 reimbursementInput.description(),
                 reimbursementInput.amount(),
                 Utilities.Status.pending,
-                employeeRepository.findById(employeeId).get());
+//                employeeRepository.findById(employeeId).get());
+                employeeRepository.findById(reimbursementInput.employeeId()).get());
     }
 
 

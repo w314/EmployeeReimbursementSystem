@@ -32,8 +32,7 @@ const AddReimbursement: React.FC<{}> = () => {
         const url = `${baseUrl}reimbursements`
         const response = await axios.post(
             url,
-            {...reimbursement},
-            {withCredentials: true}
+            {...reimbursement}
         )
         const reimbursementAdded = response.data
         console.log(`REIMBURSEMENT ADDED: ${JSON.stringify(reimbursementAdded)}`)

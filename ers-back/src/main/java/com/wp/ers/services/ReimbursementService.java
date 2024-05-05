@@ -29,10 +29,9 @@ public class ReimbursementService {
     private Mapper mapper;
 
     public Reimbursement addReimbursement(
-            ReimbursemenCreationtDTO reimbursementInput,
-            int employeeId) {
+            ReimbursemenCreationtDTO reimbursementInput) {
 
-        Reimbursement reimbursement = mapper.toReimbursement(reimbursementInput, employeeId);
+        Reimbursement reimbursement = mapper.toReimbursement(reimbursementInput);
         Reimbursement reimbursementAdded =  reimbursementRepository.save(reimbursement);
 
         return reimbursementAdded;

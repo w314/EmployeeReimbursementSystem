@@ -26,11 +26,10 @@ public class ReimbursementController {
     private ReimbursementService reimbursementService;
 
 
-    @PostMapping("/employees/{employeeId}")
+    @PostMapping()
     public ResponseEntity<Reimbursement> addReimbursement(
-            @RequestBody ReimbursemenCreationtDTO reimbursement,
-            @PathVariable int employeeId) {
-        Reimbursement newReimbursement = reimbursementService.addReimbursement(reimbursement, employeeId);
+            @RequestBody ReimbursemenCreationtDTO reimbursement) {
+        Reimbursement newReimbursement = reimbursementService.addReimbursement(reimbursement);
         return ResponseEntity.accepted().body(newReimbursement);
     }
 
