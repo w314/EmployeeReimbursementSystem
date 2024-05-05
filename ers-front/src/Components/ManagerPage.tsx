@@ -1,8 +1,6 @@
 import * as React from "react"
-import EmployeeList from "./EmployeeList"
 import { Link, Navigate } from "react-router-dom"
-import { UserType } from "../Utilities/Types"
-import { useNavigate } from "react-router-dom"
+
 
 const ManagerPage: React.FC<{} > = () => {
     

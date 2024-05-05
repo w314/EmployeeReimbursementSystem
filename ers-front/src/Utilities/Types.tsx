@@ -6,7 +6,7 @@ export enum StatusEnum {
 }
 
 export enum RoleEnum {
-    "employee" = "employee",
+    "associate" = "associate",
     "manager" = "manager"
 }
 
@@ -18,10 +18,10 @@ export type ReimbursementType = {
     status: StatusEnum;
 }
 
-export type UserType = {
+export type EmployeeType = {
     employeeId: number,
     firstName: string,
-    LastName: string,
+    lastName: string,
     role: RoleEnum,
 }
 

@@ -51,6 +51,13 @@ public class ReimbursementController {
         return ResponseEntity.ok().body(reimbursements);
     }
 
+    @GetMapping("/employees/{employeeId}")
+    public ResponseEntity<List<ReimbursementDTO>> getReimbusementsByEmployee(@PathVariable int employeeId) {
+        List<ReimbursementDTO> reimbursements = reimbursementService.getAllReimbursementByEmployee(employeeId);
+        return ResponseEntity.ok().body(reimbursements);
+
+    }
+
     @PatchMapping("/{reimbursementId}/status/{status}")
     public ResponseEntity<Reimbursement> updateReimbursementStatus(@PathVariable int reimbursementId, @PathVariable Utilities.Status status) {
         Reimbursement reimbursement = reimbursementService.updateReimbursementStatus(reimbursementId, status);

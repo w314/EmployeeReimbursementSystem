@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
-import { UserType } from "./Types"
+import { EmployeeType } from "./Types"
 
 export const fetchData = async (url: string) => {
 

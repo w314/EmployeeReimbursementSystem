@@ -1,7 +1,8 @@
 import * as React from "react"
-import { ReimbursementType, StatusEnum } from "../Utilities/Types";
+import { ReimbursementType, RoleEnum, StatusEnum } from "../Utilities/Types";
 import { baseUrl } from "../Utilities/Utilities";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Reimbursement: React.FC<{
     reimbursement: ReimbursementType,
@@ -9,6 +10,16 @@ const Reimbursement: React.FC<{
 }> = ({reimbursement, handleReimbursementUpdate}) => {
 
     // const [reimbursemetnStatus, setReimbursementStatus ] = React.useState(status)
+
+    const navigate = useNavigate();
+
+    // navigate to login page if user credentials are not populated
+    if(!sessionStorage.getItem("employeeId")) navigate('/')
+
+    // const loggedInUserId = parseInt(sessionStorage.getItem("employeeId") as string)   
+    const loggedInUserRole = sessionStorage.getItem("role")
+    console.log(`ROLE of User: ${loggedInUserRole}`)
+
 
 
         // handle change in the status of a specific reimbursement (in case it was approved or denied)
@@ -46,7 +57,11 @@ const Reimbursement: React.FC<{
 
         <>
         <div>
-            <p>{reimbursement.description}</p>
+            <div>
+                <span>{reimbursement.description} </span>
+                <button 
+                    hidden={loggedInUserRole == RoleEnum.manager || reimbursement.status != StatusEnum.pending}>edit</button>
+            </div>
             <p>{reimbursement.amount}</p>
             <p>{reimbursement.status}</p>
         </div>
@@ -54,12 +69,14 @@ const Reimbursement: React.FC<{
             <button 
                 onClick={handleStatusButtonClick} 
                 disabled={reimbursement.status != StatusEnum.pending}
+                hidden={loggedInUserRole == RoleEnum.associate}
                 id="approved">
                 approve
             </button>
             <button 
                 onClick={handleStatusButtonClick} 
                 disabled={reimbursement.status != StatusEnum.pending} 
+                hidden={loggedInUserRole == RoleEnum.associate}
                 id="denied">
                 deny
             </button>

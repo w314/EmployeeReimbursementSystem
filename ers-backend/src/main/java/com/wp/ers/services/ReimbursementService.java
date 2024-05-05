@@ -3,6 +3,7 @@ package com.wp.ers.services;
 import com.wp.ers.DTOs.Mapper;
 import com.wp.ers.DTOs.ReimbursemenCreationtDTO;
 import com.wp.ers.DTOs.ReimbursementDTO;
+import com.wp.ers.models.Employee;
 import com.wp.ers.models.Reimbursement;
 import com.wp.ers.repositories.EmployeeRepository;
 import com.wp.ers.repositories.ReimbursementRepository;
@@ -72,5 +73,16 @@ public class ReimbursementService {
         reimbursement.setStatus(status);
         Reimbursement updatedReimbursement = reimbursementRepository.save(reimbursement);
         return updatedReimbursement;
+    }
+
+    public List<ReimbursementDTO> getAllReimbursementByEmployee(int employeeId) {
+        Employee employee = employeeRepository.findById(employeeId).get();
+        List<Reimbursement> reimbursements = reimbursementRepository.findByEmployee(employee);
+        List<ReimbursementDTO> reimbursementDTOs = reimbursements
+                .stream()
+                .map(reimbursement -> mapper.toReimbursementDTO(reimbursement))
+                .toList();
+        return reimbursementDTOs;
+
     }
 }

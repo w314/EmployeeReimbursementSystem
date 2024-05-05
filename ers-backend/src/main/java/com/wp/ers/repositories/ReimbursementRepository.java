@@ -1,5 +1,6 @@
 package com.wp.ers.repositories;
 
+import com.wp.ers.models.Employee;
 import com.wp.ers.models.Reimbursement;
 import com.wp.ers.utilities.Utilities;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,4 +18,6 @@ public interface ReimbursementRepository extends JpaRepository<Reimbursement, In
     // reducing the need for boilerplate code.
 
     public List<Reimbursement> findByStatus(Utilities.Status status);
+
+    public List<Reimbursement> findByEmployee(Employee employee);
 }

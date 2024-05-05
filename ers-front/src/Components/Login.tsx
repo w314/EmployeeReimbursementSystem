@@ -1,7 +1,7 @@
 import * as React from  "react"
 import { baseUrl, fetchData } from "../Utilities/Utilities"
 import axios from "axios"
-import { RoleEnum, UserType } from "../Utilities/Types"
+import { RoleEnum, EmployeeType } from "../Utilities/Types"
 import { useNavigate } from "react-router-dom"
 import ManagerPage from "./ManagerPage"
 import EmployeePage from "./EmployeePage"
@@ -10,7 +10,7 @@ const Login: React.FC<{}> = () => {
 
     const [ userCredentials, setUserCredentials ] = React.useState({username: "", password: ""})
     const [ errorMessage, setErrorMessage ] = React.useState("");
-    const [ loggedInUser, setLoggedInUser ] = React.useState({} as UserType)
+    const [ loggedInUser, setLoggedInUser ] = React.useState({} as EmployeeType)
     const navigate = useNavigate();
 
     const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +26,7 @@ const Login: React.FC<{}> = () => {
     const loginUser = async () => {
 
         const url = `${baseUrl}employees/login`
-        const { data, status } = await axios.post<UserType>(
+        const { data, status } = await axios.post<EmployeeType>(
             url,
             {...userCredentials},
             {withCredentials: true}
@@ -39,7 +39,7 @@ const Login: React.FC<{}> = () => {
         // save logged in user to session storage
         sessionStorage.setItem("employeeId", data.employeeId.toString())
         sessionStorage.setItem("role", data.role)
-        sessionStorage.setItem("lastName", data.LastName)
+        sessionStorage.setItem("lastName", data.lastName)
         sessionStorage.setItem("firstName", data.firstName)
      }
 
@@ -71,7 +71,7 @@ const Login: React.FC<{}> = () => {
         // if the user is logged in the page rendered is based on their role
         : loggedInUser.role == RoleEnum.manager
             ? < ManagerPage />
-            : < EmployeePage />
+            : < EmployeePage employee={loggedInUser} />
     
 }
 
