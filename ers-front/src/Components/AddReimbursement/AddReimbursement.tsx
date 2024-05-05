@@ -5,17 +5,27 @@ import { useLocation } from "react-router-dom"
 import { ReimbursementInputType, StatusEnum } from "../../Utilities/Types"
 import axios from "axios"
 import { baseUrl } from "../../Utilities/Utilities"
+import { EmployeeType } from "../../Utilities/Types"
+import { getEmployee } from "../../Utilities/Utilities"
+import Login from "../Login/Login"
+import { ReimbursementType } from "../../Utilities/Types"
 
-const AddReimbursement: React.FC<{}> = () => {
+const AddReimbursement: React.FC<{
+    handleAddReimbursementSubmit: (reimbusement: ReimbursementType) => void
+}> = ({handleAddReimbursementSubmit}) => {
 
     const [ amountInput, setAmountInput ] = React.useState(0)
     const [ descriptionInput, setDescriptionInput ] = React.useState("");
 
-    const location = useLocation();
+    // const location = useLocation();
     
-    const employee = location.state.employee;
+    // const employee = location.state.employee;
 
     // console.log(`In addReimb employee: ${JSON.stringify(employee)}`)
+
+        
+    const loggedIn = sessionStorage.getItem("employeeId")
+    const employee: EmployeeType = getEmployee();
 
     const handleAmoutInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const amountEntered = event.target.value;
@@ -36,6 +46,12 @@ const AddReimbursement: React.FC<{}> = () => {
         )
         const reimbursementAdded = response.data
         console.log(`REIMBURSEMENT ADDED: ${JSON.stringify(reimbursementAdded)}`)
+        
+        // clean input fields
+        setAmountInput(0)
+        setDescriptionInput("")
+        handleAddReimbursementSubmit(reimbursementAdded)
+
     
     }
 
@@ -51,13 +67,14 @@ const AddReimbursement: React.FC<{}> = () => {
 
     }
 
-    return (
+    return loggedIn
+        ? (
         <>
-            <div className="header">
+            {/* <div className="header">
                 <Header employee={employee} />
                 <p className="welcome">{employee.firstName} {employee.lastName}</p>
 
-            </div>
+            </div> */}
             <fieldset>
                 <legend> Add New Reimbursement</legend>
                 <label htmlFor="amoutn">Amount: </label>
@@ -79,6 +96,7 @@ const AddReimbursement: React.FC<{}> = () => {
             </fieldset>
         </>
     )
+    : <Login />
 }
 
 

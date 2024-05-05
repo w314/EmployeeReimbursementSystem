@@ -1,7 +1,7 @@
 import { baseUrl, fetchData } from "../../Utilities/Utilities"
 import * as React from "react"
 import Reimbursement from "../Reimbursement/Reimbursement";
-import { ReimbursementType, RoleEnum, StatusEnum, EmployeeType } from "../../Utilities/Types";
+import { ReimbursementType, RoleEnum, StatusEnum, EmployeeType, ReimbursementInputType } from "../../Utilities/Types";
 import { useNavigate } from "react-router-dom";
 import InvalidCredentials from "../InvalidCredentials";
 import Employee from "../Employee";
@@ -10,11 +10,14 @@ import { useLocation } from "react-router-dom";
 import "./ReimbursementList.css"
 import { getEmployee } from "../../Utilities/Utilities";
 import Login from "../Login/Login";
+import { Link } from "react-router-dom";
+import AddReimbursement from "../AddReimbursement/AddReimbursement";
 
 const ReimbursementList: React.FC<{}> = () => {
 
     const [ reimbursements, setReimbursements ] = React.useState([] as ReimbursementType[])
     const [ statusFilter, setStatusFilter ] = React.useState("all" as StatusEnum | "all");
+    const [ showAddReimbursement , setShowAddReimbursement ] = React.useState(false)
     
     // const navigate = useNavigate();
     // const location = useLocation();
@@ -55,11 +58,14 @@ const ReimbursementList: React.FC<{}> = () => {
     }
 
     const handleAddReimbursementClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        // navigate("/reimbursements/addReimbursement", {
-        //     state: {
-        //         employee: employee
-        //     }
-        // })
+        setShowAddReimbursement(true)
+    }
+
+    const handleAddReimbursementSubmit = (reimbursement: ReimbursementType) => {
+        console.log(`back in reim list`)
+        console.log(JSON.stringify(reimbursement))
+        setShowAddReimbursement(false)
+        setReimbursements([...reimbursements, reimbursement])
     }
 
 
@@ -102,7 +108,16 @@ const ReimbursementList: React.FC<{}> = () => {
                 <button 
                     hidden={employee.role=="manager"}
                     onClick={handleAddReimbursementClick}
-                >Add Reimbursement</button>
+                >
+                {/* <Link to={`/reimbursements/addReimbursement`} >Add Reimbursement</Link> */}
+                Add Reimbursement
+                </button>
+            </div>
+            <div>
+                { showAddReimbursement
+                ?  <AddReimbursement handleAddReimbursementSubmit={handleAddReimbursementSubmit}/>
+                : null
+                }   
             </div>
             {/* render list of reimbursements */}
             <ul>
