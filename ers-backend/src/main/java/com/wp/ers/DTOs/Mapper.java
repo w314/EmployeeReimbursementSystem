@@ -37,7 +37,8 @@ public class Mapper {
                 reimbursement.getDescription(),
                 reimbursement.getAmount(),
                 reimbursement.getStatus(),
-                reimbursement.getEmployee().getFirstName() + " " + reimbursement.getEmployee().getLastName()
+                reimbursement.getEmployee().getFirstName() + " " + reimbursement.getEmployee().getLastName(),
+                reimbursement.getEmployee().getEmployeeId()
         );
     }
 }

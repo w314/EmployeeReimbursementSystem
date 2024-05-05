@@ -1,0 +1,17 @@
+/* * {
+    width: 100%;
+} */
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+
+}

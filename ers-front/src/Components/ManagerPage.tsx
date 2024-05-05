@@ -1,8 +1,12 @@
 import * as React from "react"
 import { Link, Navigate } from "react-router-dom"
+import Header from "./Header/Header"
+import { EmployeeType } from "../Utilities/Types"
 
 
-const ManagerPage: React.FC<{} > = () => {
+const ManagerPage: React.FC<{
+    employee: EmployeeType
+} > = ({ employee }) => {
     
     // const navigate = useNavigate();
 
@@ -16,12 +20,15 @@ const ManagerPage: React.FC<{} > = () => {
     // }
 
     return  (
-        <nav>
-            <Link to="/employees">Employees</Link>
-            <Link to="/reimbursements">Reimbursements</Link>
-            {/* <button onClick={handleClick} id="employees">Employees</button> */}
-            {/* <button onClick={handleClick} id="reimbursements">Reimbursements</button> */}
-        </nav>
+        <>
+             <Header employee={employee} />
+            {/* <nav> */}
+                {/* <Link to="/employees">Employees</Link> */}
+                {/* <Link to="/reimbursements">Reimbursements</Link> */}
+                {/* <button onClick={handleClick} id="employees">Employees</button> */}
+                {/* <button onClick={handleClick} id="reimbursements">Reimbursements</button> */}
+            {/* </nav> */}
+        </>
     )
 }
 

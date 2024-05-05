@@ -1,18 +1,23 @@
-import { baseUrl, fetchData } from "../Utilities/Utilities"
+import { baseUrl, fetchData } from "../../Utilities/Utilities"
 import * as React from "react"
-import Reimbursement from "./Reimbursement";
-import { ReimbursementType, RoleEnum, StatusEnum, EmployeeType } from "../Utilities/Types";
+import Reimbursement from "../Reimbursement";
+import { ReimbursementType, RoleEnum, StatusEnum, EmployeeType } from "../../Utilities/Types";
 import { useNavigate } from "react-router-dom";
-import InvalidCredentials from "./InvalidCredentials";
-import Employee from "./Employee";
+import InvalidCredentials from "../InvalidCredentials";
+import Employee from "../Employee";
+import Header from "../Header/Header";
+import { useLocation } from "react-router-dom";
+import "./ReimbursementList.css"
 
-
-const ReimbursementList: React.FC<{} > = () => {
+const ReimbursementList: React.FC<{
+    employee: EmployeeType | null
+} > = (props) => {
 
     const [ reimbursements, setReimbursements ] = React.useState([] as ReimbursementType[])
     const [ statusFilter, setStatusFilter ] = React.useState("all" as StatusEnum | "all");
     
     const navigate = useNavigate();
+    const location = useLocation();
 
 
     // navigate to login page if user credentials are not populated
@@ -20,6 +25,8 @@ const ReimbursementList: React.FC<{} > = () => {
 
     const loggedInUserId = parseInt(sessionStorage.getItem("employeeId") as string)   
     const loggedInUserRole = sessionStorage.getItem("role")
+
+    const employee = props.employee == null ? location.state.employee : props.employee
 
     // handle change in how we filter the ReimbursementList (all, pending, approved or denied only)
     const handleStatusFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -65,15 +72,21 @@ const ReimbursementList: React.FC<{} > = () => {
     // return loggedInUserRole == RoleEnum.manager
     // ? (
     return (
-        <>
-            <h1>Reimbursements</h1>
-            <select onChange={handleStatusFilterChange}>
-                <option value="all">All</option>
-                <option value="pending">Pending</option>
-                <option value="approved">Approved</option>
-                <option value="denied">Denied</option>
-            </select>
-            <p>current status: {statusFilter}</p>
+        <div className="content">  
+            <div  hidden={employee.role == RoleEnum.associate}>
+            < Header 
+                employee={employee}          />
+
+            </div>
+            <div className="title">
+                <h2>Reimbursements</h2>
+                <select onChange={handleStatusFilterChange}>
+                    <option value="all">All</option>
+                    <option value="pending">Pending</option>
+                    <option value="approved">Approved</option>
+                    <option value="denied">Denied</option>
+                </select>
+            </div>
             {/* render list of reimbursements */}
             <ul>
                 {reimbursements
@@ -93,7 +106,7 @@ const ReimbursementList: React.FC<{} > = () => {
                     </li>
                 ))}
             </ul>
-        </>
+        </div>
     )
     // : < InvalidCredentials />
 

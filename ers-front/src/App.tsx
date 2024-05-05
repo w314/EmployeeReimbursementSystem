@@ -1,20 +1,23 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import ReimbursementList from './Components/ReimbursementList';
+import ReimbursementList from './Components/ReimbursementList/ReimbursementList';
 import EmployeeList from './Components/EmployeeList';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ManagerPage from './Components/ManagerPage';
-import Login from './Components/Login';
+import Login from './Components/Login/Login';
+import EmployeePage from './Components/EmployeePage';
+import Header from './Components/Header/Header';
 
 function App() {
   return (
     <div className="App">
+      {/* <Header /> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login/>}></Route>
           <Route path="/employees" element={<EmployeeList />}></Route>
-          <Route path="/reimbursements" element={<ReimbursementList />}></Route>
+          <Route path="/reimbursements" element={<ReimbursementList employee={null} />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,7 +1,8 @@
 import * as React from "react";
 import { EmployeeType, RoleEnum } from "../Utilities/Types";
 import { useNavigate } from "react-router-dom";
-import ReimbursementList from "./ReimbursementList";
+import ReimbursementList from "./ReimbursementList/ReimbursementList";
+import Header from "./Header/Header";
 
 const EmployeePage: React.FC<{
     employee: EmployeeType
@@ -20,10 +21,11 @@ const EmployeePage: React.FC<{
 
     return (
         <>
+            < Header employee={employee} />
             <h1>Employee Page</h1>
             <h2>{employee.firstName} {employee.lastName}</h2>
 
-            <ReimbursementList />
+            <ReimbursementList  employee={employee}/>
         </>
     )
 } 

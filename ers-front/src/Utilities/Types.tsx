@@ -16,6 +16,8 @@ export type ReimbursementType = {
     description: string;
     amount: number;
     status: StatusEnum;
+    employee: string;
+    employeeId: number;
 }
 
 export type EmployeeType = {

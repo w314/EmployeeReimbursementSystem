@@ -1,10 +1,12 @@
 import * as React from  "react"
-import { baseUrl, fetchData } from "../Utilities/Utilities"
+import { baseUrl, fetchData } from "../../Utilities/Utilities"
 import axios from "axios"
-import { RoleEnum, EmployeeType } from "../Utilities/Types"
+import { RoleEnum, EmployeeType } from "../../Utilities/Types"
 import { useNavigate } from "react-router-dom"
-import ManagerPage from "./ManagerPage"
-import EmployeePage from "./EmployeePage"
+import ManagerPage from "../ManagerPage"
+import EmployeePage from "../EmployeePage"
+import Header from "../Header/Header"
+import "./Login.css"
 
 const Login: React.FC<{}> = () => {
 
@@ -59,18 +61,29 @@ const Login: React.FC<{}> = () => {
     // if the user is not logged in a login page is rendered
     return loggedInUser.employeeId == null
         ? (
-            <>
-            <label htmlFor="username">Username: </label>
-            <input type="text" name="username" id="username" onChange={handleUsernameChange} value={userCredentials.username} />
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" name="password" onChange={handlePasswordChange} value={userCredentials.password}/>
-            <button onClick={handleOnClick}>Login</button>
-        </>
+            <div className="content">
+                < Header employee={null} />
+                <div>
+                    {/* <form> */}
+                        <fieldset>
+                            <legend>Please Log In to ERS</legend>
+                            <label htmlFor="username">Username: </label>
+                            <input type="text" name="username" id="username" onChange={handleUsernameChange} value={userCredentials.username} />
+                            <label htmlFor="password">Password</label>
+                            <input type="password" id="password" name="password" onChange={handlePasswordChange} value={userCredentials.password}/>
+                            <button onClick={handleOnClick}>Login</button>
+
+                        </fieldset>
+                    {/* </form> */}
+                </div>
+
+
+            </div>
 
         )
         // if the user is logged in the page rendered is based on their role
         : loggedInUser.role == RoleEnum.manager
-            ? < ManagerPage />
+            ? < ManagerPage employee={loggedInUser}/>
             : < EmployeePage employee={loggedInUser} />
     
 }

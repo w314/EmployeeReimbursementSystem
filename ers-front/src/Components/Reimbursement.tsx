@@ -2,7 +2,7 @@ import * as React from "react"
 import { ReimbursementType, RoleEnum, StatusEnum } from "../Utilities/Types";
 import { baseUrl } from "../Utilities/Utilities";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Reimbursement: React.FC<{
     reimbursement: ReimbursementType,
@@ -19,6 +19,7 @@ const Reimbursement: React.FC<{
     // const loggedInUserId = parseInt(sessionStorage.getItem("employeeId") as string)   
     const loggedInUserRole = sessionStorage.getItem("role")
     console.log(`ROLE of User: ${loggedInUserRole}`)
+
 
 
 
@@ -64,6 +65,14 @@ const Reimbursement: React.FC<{
             </div>
             <p>{reimbursement.amount}</p>
             <p>{reimbursement.status}</p>
+            <div 
+                hidden={loggedInUserRole == RoleEnum.associate}
+            >
+                {/* <Link to={`${baseUrl}/reimbursements/employees/${reimbursement.employeeId}`}>{reimbursement.employee}</Link> */}
+                <p>{reimbursement.employee}</p>
+                
+            </div>
+            <p>{JSON.stringify(reimbursement)}</p>
         </div>
         <div>
             <button 

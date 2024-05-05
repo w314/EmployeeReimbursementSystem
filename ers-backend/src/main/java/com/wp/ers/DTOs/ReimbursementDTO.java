@@ -8,5 +8,6 @@ public record ReimbursementDTO(
         String description,
         Float amount,
         Utilities.Status status,
-        String employee
+        String employee,
+        int employeeId
 ) { }
