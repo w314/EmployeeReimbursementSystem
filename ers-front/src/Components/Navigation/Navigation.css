@@ -1,4 +1,4 @@
-
+/* 
 button {
     padding: 5px;
     margin-right: 20px;
@@ -8,4 +8,10 @@ nav {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+} */
+
+.activeButton {
+    font-weight: 600;
+    border: 2px solid gray;
+
 }
