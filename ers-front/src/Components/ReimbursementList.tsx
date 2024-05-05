@@ -1,17 +1,24 @@
-import { Link } from "react-router-dom";
 import { baseUrl, fetchData } from "../Utilities/Utilities"
 import * as React from "react"
 import Reimbursement from "./Reimbursement";
-import { ReimbursementType, StatusEnum } from "../Utilities/Types";
-import axios from "axios";
+import { ReimbursementType, RoleEnum, StatusEnum, UserType } from "../Utilities/Types";
+import { useNavigate } from "react-router-dom";
+import InvalidCredentials from "./InvalidCredentials";
 
 
-
-const ReimbursementList: React.FC<{}> = () => {
+const ReimbursementList: React.FC<{} > = () => {
 
     const [ reimbursements, setReimbursements ] = React.useState([] as ReimbursementType[])
     const [ statusFilter, setStatusFilter ] = React.useState("all" as StatusEnum | "all");
+    
+    const navigate = useNavigate();
 
+
+    // navigate to login page if user credentials are not populated
+    if(!sessionStorage.getItem("employeeId")) navigate('/')
+
+    // const loggedInUserId = parseInt(sessionStorage.getItem("employeeId") as string)   
+    const loggedInUserRole = sessionStorage.getItem("role")
 
     // handle change in how we filter the ReimbursementList (all, pending, approved or denied only)
     const handleStatusFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -50,8 +57,10 @@ const ReimbursementList: React.FC<{}> = () => {
         handleGetReimbursements();
     }, [])
 
-
-    return (
+    
+    // if logged in user is not a manager do not render the reimbursement list
+    return loggedInUserRole == RoleEnum.manager
+    ? (
         <>
             <h1>Reimbursements</h1>
             <select onChange={handleStatusFilterChange}>
@@ -82,7 +91,8 @@ const ReimbursementList: React.FC<{}> = () => {
             </ul>
         </>
     )
-}
+    : < InvalidCredentials />
 
+}
 
 export default ReimbursementList

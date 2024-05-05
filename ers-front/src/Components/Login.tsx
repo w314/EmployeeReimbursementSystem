@@ -4,6 +4,7 @@ import axios from "axios"
 import { RoleEnum, UserType } from "../Utilities/Types"
 import { useNavigate } from "react-router-dom"
 import ManagerPage from "./ManagerPage"
+import EmployeePage from "./EmployeePage"
 
 const Login: React.FC<{}> = () => {
 
@@ -35,12 +36,11 @@ const Login: React.FC<{}> = () => {
         console.log(status);
         
         setLoggedInUser({... data})
-
-        // show appropriate page
-        // const url = loggedInUser.role === RoleEnum.manager 
-        //     ? `${baseUrl}` 
-        //     : `${baseUrl}`
-
+        // save logged in user to session storage
+        sessionStorage.setItem("employeeId", data.employeeId.toString())
+        sessionStorage.setItem("role", data.role)
+        sessionStorage.setItem("lastName", data.LastName)
+        sessionStorage.setItem("firstName", data.firstName)
      }
 
 
@@ -55,6 +55,8 @@ const Login: React.FC<{}> = () => {
         loginUser();      
     }
 
+
+    // if the user is not logged in a login page is rendered
     return loggedInUser.employeeId == null
         ? (
             <>
@@ -66,9 +68,10 @@ const Login: React.FC<{}> = () => {
         </>
 
         )
+        // if the user is logged in the page rendered is based on their role
         : loggedInUser.role == RoleEnum.manager
             ? < ManagerPage />
-            : <h1>Employee</h1>
+            : < EmployeePage />
     
 }
 

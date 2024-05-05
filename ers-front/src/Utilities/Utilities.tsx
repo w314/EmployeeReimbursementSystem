@@ -1,4 +1,6 @@
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
+import { UserType } from "./Types"
 
 export const fetchData = async (url: string) => {
 
@@ -37,3 +39,10 @@ export const fetchData = async (url: string) => {
 }
 
 export const baseUrl = "http://localhost:8080/";
+
+
+// export const checkLoginCredentials = ( ) => {
+      
+//     // check if user is logged in and navigate to login page if not logged in
+//     const userId = 
+// }

@@ -20,8 +20,8 @@ export type ReimbursementType = {
 
 export type UserType = {
     employeeId: number,
-    firstName: String,
-    LastName: String,
+    firstName: string,
+    LastName: string,
     role: RoleEnum,
 }
 
