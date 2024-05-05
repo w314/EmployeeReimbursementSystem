@@ -2,6 +2,9 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgray ;
 }
 
 .details {
@@ -56,4 +59,8 @@ label {
 
 .bolder {
     font-weight: 500;
+}
+
+p {
+    margin: 0;
 }

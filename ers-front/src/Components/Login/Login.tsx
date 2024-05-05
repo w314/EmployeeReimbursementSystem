@@ -4,7 +4,7 @@ import axios from "axios"
 import { RoleEnum, EmployeeType } from "../../Utilities/Types"
 import { useNavigate } from "react-router-dom"
 import ManagerPage from "../ManagerPage"
-import EmployeePage from "../EmployeePage"
+import EmployeePage from "../EmployeePage/EmployeePage"
 import Header from "../Header/Header"
 import "./Login.css"
 import ReimbursementList from "../ReimbursementList/ReimbursementList"
@@ -63,7 +63,10 @@ const Login: React.FC<{}> = () => {
     return loggedInUser.employeeId == null
         ? (
             <div className="content">
+                <div className="header textLeft">
                 < Header employee={null} />
+
+                </div>
                 <div>
                     {/* <form> */}
                         <fieldset>
@@ -83,10 +86,10 @@ const Login: React.FC<{}> = () => {
 
         )
         // if the user is logged in the page rendered is based on their role
-        // : loggedInUser.role == RoleEnum.manager
-        //     ? < ManagerPage employee={loggedInUser}/>
-        //     : < EmployeePage employee={loggedInUser} />
-        : <ReimbursementList employee={loggedInUser} />
+        : loggedInUser.role == RoleEnum.manager
+            ? < ManagerPage employee={loggedInUser}/>
+            : < EmployeePage employee={loggedInUser} />
+        // : <ReimbursementList employee={loggedInUser} />
     
 }
 

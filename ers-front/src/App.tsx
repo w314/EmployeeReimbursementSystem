@@ -6,7 +6,7 @@ import EmployeeList from './Components/EmployeeList';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ManagerPage from './Components/ManagerPage';
 import Login from './Components/Login/Login';
-import EmployeePage from './Components/EmployeePage';
+import EmployeePage from './Components/EmployeePage/EmployeePage';
 import Header from './Components/Header/Header';
 
 function App() {

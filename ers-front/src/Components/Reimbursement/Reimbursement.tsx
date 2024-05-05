@@ -58,15 +58,16 @@ const Reimbursement: React.FC<{
     return (
         <div className="reimbursement">
             <div  className="details">
+            {/* <span className="rowFlex"> */}
+                    {/* <label htmlFor="status">Status: </label> */}
+                    <p className={`${reimbursement.status} bolder`}>{reimbursement.status.toLocaleUpperCase()}</p>
+                {/* </span> */}
                 <span className="rowFlex" hidden={loggedInUserRole == RoleEnum.associate}>
                     {/* <Link to={`${baseUrl}/reimbursements/employees/${reimbursement.employeeId}`}>{reimbursement.employee}</Link> */}
                     <label htmlFor="employee">Submitted By:</label>
                     <span id="employee">{reimbursement.employee}</span>
                 </span>
-                <span className="rowFlex">
-                    <label htmlFor="status">Status: </label>
-                    <span className={`${reimbursement.status} bolder`}>{reimbursement.status.toLocaleUpperCase()}</span>
-                </span>
+
                 <div>
                     <label htmlFor="description"></label>
                     <button hidden={loggedInUserRole == RoleEnum.manager || reimbursement.status != StatusEnum.pending}>edit</button>

@@ -4,6 +4,18 @@
   /* background-color: #282c34; */
   /* color: white; */
 }
+
+.header {
+  /* width: 100%; */
+  border-bottom: 3px solid gray;
+  padding-bottom: 10px;
+
+}
+
+.columnFlex {
+  display: flex;
+  flex-direction: column;
+}
 /*
 .App-logo {
   height: 40vmin;
