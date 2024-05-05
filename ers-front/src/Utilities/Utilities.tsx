@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { EmployeeType } from "./Types"
+import { RoleEnum } from "./Types"
 
 export const fetchData = async (url: string) => {
 
@@ -46,3 +47,12 @@ export const baseUrl = "http://localhost:8080/";
 //     // check if user is logged in and navigate to login page if not logged in
 //     const userId = 
 // }
+
+export const getEmployee = () => {
+    return {
+        employeeId: parseInt(sessionStorage.getItem("employeeId") as string, 10),
+        firstName: sessionStorage.getItem("firstName") as string,
+        lastName: sessionStorage.getItem("lastName") as string,
+        role: sessionStorage.getItem("role") as RoleEnum   
+    } 
+}

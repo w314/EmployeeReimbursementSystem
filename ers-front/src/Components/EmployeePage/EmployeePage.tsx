@@ -29,7 +29,7 @@ const EmployeePage: React.FC<{
             </div>
 
 
-            <ReimbursementList  employee={employee}/>
+            <ReimbursementList/>
         </div>
     )
 } 

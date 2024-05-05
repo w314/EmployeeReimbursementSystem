@@ -4,6 +4,9 @@ import { baseUrl } from "../../Utilities/Utilities";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "./Reimbursement.css"
+import { getEmployee } from "../../Utilities/Utilities";
+import { EmployeeType } from "../../Utilities/Types";
+import Login from "../Login/Login";
 
 const Reimbursement: React.FC<{
     reimbursement: ReimbursementType,
@@ -14,14 +17,10 @@ const Reimbursement: React.FC<{
 
     const navigate = useNavigate();
 
-    // navigate to login page if user credentials are not populated
-    if(!sessionStorage.getItem("employeeId")) navigate('/')
 
-    // const loggedInUserId = parseInt(sessionStorage.getItem("employeeId") as string)   
-    const loggedInUserRole = sessionStorage.getItem("role")
-    console.log(`ROLE of User: ${loggedInUserRole}`)
-
-
+            
+    const loggedIn = sessionStorage.getItem("employeeId")
+    const employee: EmployeeType = getEmployee();
 
 
         // handle change in the status of a specific reimbursement (in case it was approved or denied)
@@ -55,14 +54,15 @@ const Reimbursement: React.FC<{
 
     }
 
-    return (
+    return loggedIn
+      ? (
         <div className="reimbursement">
             <div  className="details">
             {/* <span className="rowFlex"> */}
                     {/* <label htmlFor="status">Status: </label> */}
                     <p className={`${reimbursement.status} bolder`}>{reimbursement.status.toLocaleUpperCase()}</p>
                 {/* </span> */}
-                <span className="rowFlex" hidden={loggedInUserRole == RoleEnum.associate}>
+                <span className="rowFlex" hidden={employee.role == RoleEnum.associate}>
                     {/* <Link to={`${baseUrl}/reimbursements/employees/${reimbursement.employeeId}`}>{reimbursement.employee}</Link> */}
                     <label htmlFor="employee">Submitted By:</label>
                     <span id="employee">{reimbursement.employee}</span>
@@ -70,7 +70,7 @@ const Reimbursement: React.FC<{
 
                 <div>
                     <label htmlFor="description"></label>
-                    <button hidden={loggedInUserRole == RoleEnum.manager || reimbursement.status != StatusEnum.pending}>edit</button>
+                    <button hidden={employee.role == RoleEnum.manager || reimbursement.status != StatusEnum.pending}>edit</button>
 
                     <span id="description">{reimbursement.description} </span>
                 </div>
@@ -81,7 +81,7 @@ const Reimbursement: React.FC<{
                     className={reimbursement.status == StatusEnum.pending ? "approved" : ""}
                     onClick={handleStatusButtonClick} 
                     disabled={reimbursement.status != StatusEnum.pending}
-                    hidden={loggedInUserRole == RoleEnum.associate}
+                    hidden={employee.role == RoleEnum.associate}
                     id="approved">
                     Approve
                 </button>
@@ -89,13 +89,14 @@ const Reimbursement: React.FC<{
                     className={reimbursement.status == StatusEnum.pending ? "denied" : ""}
                     onClick={handleStatusButtonClick} 
                     disabled={reimbursement.status != StatusEnum.pending} 
-                    hidden={loggedInUserRole == RoleEnum.associate}
+                    hidden={employee.role == RoleEnum.associate}
                     id="denied">
                     Deny
                 </button>
             </div>
         </div>
     )
+    : < Login />
 }
 
 export default Reimbursement

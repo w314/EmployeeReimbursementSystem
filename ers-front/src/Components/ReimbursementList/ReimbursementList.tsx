@@ -8,25 +8,29 @@ import Employee from "../Employee";
 import Header from "../Header/Header";
 import { useLocation } from "react-router-dom";
 import "./ReimbursementList.css"
+import { getEmployee } from "../../Utilities/Utilities";
+import Login from "../Login/Login";
 
-const ReimbursementList: React.FC<{
-    employee: EmployeeType | null
-} > = (props) => {
+const ReimbursementList: React.FC<{}> = () => {
 
     const [ reimbursements, setReimbursements ] = React.useState([] as ReimbursementType[])
     const [ statusFilter, setStatusFilter ] = React.useState("all" as StatusEnum | "all");
     
-    const navigate = useNavigate();
-    const location = useLocation();
+    // const navigate = useNavigate();
+    // const location = useLocation();
 
 
     // navigate to login page if user credentials are not populated
-    if(!sessionStorage.getItem("employeeId")) navigate('/')
+    // if(!sessionStorage.getItem("employeeId")) navigate('/')
 
-    const loggedInUserId = parseInt(sessionStorage.getItem("employeeId") as string)   
-    const loggedInUserRole = sessionStorage.getItem("role")
+            
+    const loggedIn = sessionStorage.getItem("employeeId")
+    const employee: EmployeeType = getEmployee();
 
-    const employee = props.employee == null ? location.state.employee : props.employee
+    // const loggedInUserId = parseInt(sessionStorage.getItem("employeeId") as string)   
+    // const loggedInUserRole = sessionStorage.getItem("role")
+
+    // const employee = props.employee == null ? location.state.employee : props.employee
 
     // handle change in how we filter the ReimbursementList (all, pending, approved or denied only)
     const handleStatusFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -51,20 +55,20 @@ const ReimbursementList: React.FC<{
     }
 
     const handleAddReimbursementClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        navigate("/reimbursements/addReimbursement", {
-            state: {
-                employee: employee
-            }
-        })
+        // navigate("/reimbursements/addReimbursement", {
+        //     state: {
+        //         employee: employee
+        //     }
+        // })
     }
 
 
     React.useEffect(() => {
         console.log('fetching reimbursements')
         const handleGetReimbursements = async () => {
-            const url = loggedInUserRole == RoleEnum.manager as string 
+            const url = employee.role == RoleEnum.manager as string 
                 ?  `${baseUrl}reimbursements`
-                :  `${baseUrl}reimbursements/employees/${loggedInUserId}`
+                :  `${baseUrl}reimbursements/employees/${employee.employeeId}`
             const res  = await fetchData(url);
             if(res?.response) {
                 console.log(`INITIAL REIMB LIST:`)
@@ -78,8 +82,9 @@ const ReimbursementList: React.FC<{
 
     // if logged in user is not a manager do not render the reimbursement list
     // return loggedInUserRole == RoleEnum.manager
-    // ? (
-    return (
+
+    return  loggedIn 
+        ? (
         <div className="content">  
             {/* <div  hidden={employee.role == RoleEnum.associate}>
             < Header 
@@ -95,7 +100,7 @@ const ReimbursementList: React.FC<{
                     <option value="denied">Denied</option>
                 </select>
                 <button 
-                    hidden={loggedInUserRole=="manager"}
+                    hidden={employee.role=="manager"}
                     onClick={handleAddReimbursementClick}
                 >Add Reimbursement</button>
             </div>
@@ -120,7 +125,7 @@ const ReimbursementList: React.FC<{
             </ul>
         </div>
     )
-    // : < InvalidCredentials />
+    : <Login />
 
 }
 

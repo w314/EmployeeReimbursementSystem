@@ -3,34 +3,18 @@ import { useNavigate } from "react-router-dom"
 import { EmployeeType } from "../../Utilities/Types"
 import "./Navigation.css"
 
-const Navigation: React.FC<{
-    employee: EmployeeType
-}> = ({employee}) => {
+const Navigation: React.FC<{}> = () => {
 
     const navigate = useNavigate();
 
 
     const handleReimbursementClick = () => {
-        navigate("/reimbursements", {
-            state: {
-             employee
-            }    
-        })
+        navigate("/reimbursements")
     }
     
     const handleEmployeesClick = () => {
-        navigate("/employees", {
-            state: {
-             employee
-            }    
-        })
+        navigate("/employees")
     }
-
-    // const hideNavigation = () => {
-    //     if(employee == null) return true
-    //     if(employee.role == RoleEnum.associate) return true
-    //     return false
-    // }
 
 
     return(

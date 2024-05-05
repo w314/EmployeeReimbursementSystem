@@ -86,7 +86,8 @@ const Login: React.FC<{}> = () => {
         )
         // if the user is logged in the page rendered is based on their role
         : loggedInUser.role == RoleEnum.manager
-            ? < ManagerPage employee={loggedInUser}/>
+            // ? < ManagerPage employee={loggedInUser}/>
+            ? < ManagerPage/>
             : < EmployeePage employee={loggedInUser} />
         // : <ReimbursementList employee={loggedInUser} />
     

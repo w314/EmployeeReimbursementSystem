@@ -7,12 +7,25 @@ const Header: React.FC<{
     employee: EmployeeType | null
 }> = ({employee}) => {
 
+    const [loggedOut, setLoggedOut ] = React.useState(employee == null);
+
     const navigate = useNavigate();
 
-    const handleLogoutClick = () => {
-        sessionStorage.clear();
-        navigate('/')
+
+ 
+
+        const handleLogoutClick = () => {
+            console.log(`IN HANDLELOGOUT`)
+            sessionStorage.clear();
+            setLoggedOut(true)
     }
+
+    React.useEffect(() => {
+        if(loggedOut) {
+            navigate('/')
+        }
+
+    },[loggedOut])
  
 
     return (
@@ -20,7 +33,7 @@ const Header: React.FC<{
             <h1>Employee Reimbursement System</h1>
             <button 
                 onClick={handleLogoutClick}
-                hidden={employee == null}
+                hidden={loggedOut}
             >Logout</button>
         </div>
 

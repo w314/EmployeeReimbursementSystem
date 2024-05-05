@@ -60,8 +60,8 @@ public class ReimbursementController {
     }
 
     @PatchMapping("/{reimbursementId}/status/{status}")
-    public ResponseEntity<Reimbursement> updateReimbursementStatus(@PathVariable int reimbursementId, @PathVariable Utilities.Status status) {
-        Reimbursement reimbursement = reimbursementService.updateReimbursementStatus(reimbursementId, status);
-        return ResponseEntity.ok().body(reimbursement);
+    public ResponseEntity<ReimbursementDTO> updateReimbursementStatus(@PathVariable int reimbursementId, @PathVariable Utilities.Status status) {
+        ReimbursementDTO reimbursementDTO = reimbursementService.updateReimbursementStatus(reimbursementId, status);
+        return ResponseEntity.ok().body(reimbursementDTO);
     }
 }

@@ -18,9 +18,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login/>}></Route>
-          <Route path="/employees" element={<EmployeeList />}></Route>
-          <Route path="/reimbursements" element={<ReimbursementList employee={null} />}></Route>
-+          <Route path="/reimbursements/addReimbursement" element={<AddReimbursement />}></ Route>
+          {/* <Route path="/employees" element={<EmployeeList />}></Route> */}
+          {/* <Route path="/reimbursements" element={<ReimbursementList employee={null} />}></Route> */}
+{/* +          <Route path="/reimbursements/addReimbursement" element={<AddReimbursement />}></ Route> */}
         </Routes>
       </BrowserRouter>
     </div>
