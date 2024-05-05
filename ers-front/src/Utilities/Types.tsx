@@ -20,6 +20,13 @@ export type ReimbursementType = {
     employeeId: number;
 }
 
+export type ReimbursementInputType = {
+    description: string;
+    amount: number;
+    employeeId: number;
+
+}
+
 export type EmployeeType = {
     employeeId: number,
     firstName: string,
