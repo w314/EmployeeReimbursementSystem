@@ -49,10 +49,13 @@ export const baseUrl = "http://localhost:8080/";
 // }
 
 export const getEmployee = () => {
-    return {
+
+    const employee: EmployeeType =  {
         employeeId: parseInt(sessionStorage.getItem("employeeId") as string, 10),
         firstName: sessionStorage.getItem("firstName") as string,
         lastName: sessionStorage.getItem("lastName") as string,
         role: sessionStorage.getItem("role") as RoleEnum   
     } 
+
+    return employee;
 }

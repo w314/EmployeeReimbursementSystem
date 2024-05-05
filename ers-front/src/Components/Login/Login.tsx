@@ -88,7 +88,7 @@ const Login: React.FC<{}> = () => {
         : loggedInUser.role == RoleEnum.manager
             // ? < ManagerPage employee={loggedInUser}/>
             ? < ManagerPage/>
-            : < EmployeePage employee={loggedInUser} />
+            : < EmployeePage />
         // : <ReimbursementList employee={loggedInUser} />
     
 }
