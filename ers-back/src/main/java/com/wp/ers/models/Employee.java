@@ -8,6 +8,8 @@ import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 import  com.wp.ers.utilities.Utilities;
 
+import java.util.List;
+
 // lombok annotations
 //@Data
 @Entity // marks class as a table in our database
@@ -37,6 +39,12 @@ public class Employee {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Utilities.Role role;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reimbursement> reimbursements;
+
+
+
 
     public int getEmployeeId() {
         return employeeId;

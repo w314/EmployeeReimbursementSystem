@@ -58,4 +58,10 @@ public class EmployeeController {
         return ResponseEntity.ok().body(employee);
     }
 
+    @DeleteMapping("/{employeeId}")
+    public ResponseEntity<?> deleteEmployee (@PathVariable int employeeId) {
+        employeeService.deleteEmployee(employeeId);
+        return ResponseEntity.accepted().build();
+    }
+
 }

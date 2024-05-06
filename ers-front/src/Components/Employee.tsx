@@ -5,31 +5,22 @@ import InvalidCredentials from "./InvalidCredentials"
 
 const Employee: React.FC<{
     employee: EmployeeType
-}> = ({employee}) => {
+    handleEmployeeDelete: (employee: EmployeeType) => void
+}> = ({employee, handleEmployeeDelete}) => {
 
-    const [employees, setEmployees] = React.useState([] as EmployeeType[]) ;
-    const navigate = useNavigate();
 
-    // navigate to login page if user credentials are not populated
-    if(!sessionStorage.getItem("employeeId")) navigate('/')
-
-    // const loggedInUserId = parseInt(sessionStorage.getItem("employeeId") as string)   
-    const loggedInUserRole = sessionStorage.getItem("role")
-    console.log(`ROLE of User: ${loggedInUserRole}`)
-
-    const handleClick = () => {
-
+    const handleDeleteClick = () => {
+        handleEmployeeDelete(employee)
     }
 
 
-    return loggedInUserRole == RoleEnum.manager
-        ? (
+    return (
             <>
                 <p>{employee.firstName} {employee.lastName}</p>
-                <button onClick={handleClick}>Delete</button>
+                <button onClick={handleDeleteClick}>Delete</button>
             </>
         )
-        : < InvalidCredentials />
+
  
 }
 
