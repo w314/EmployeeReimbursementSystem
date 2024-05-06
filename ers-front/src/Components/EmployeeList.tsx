@@ -3,7 +3,7 @@ import { baseUrl, fetchData } from "../Utilities/Utilities";
 import { useNavigate } from "react-router-dom";
 import { EmployeeType, RoleEnum } from "../Utilities/Types";
 import InvalidCredentials from "./InvalidCredentials";
-import Employee from "./Employee";
+import Employee from "./Employee/Employee";
 import { getEmployee } from "../Utilities/Utilities";
 import Login from "./Login/Login";
 import Header from "./Header/Header";
@@ -56,7 +56,8 @@ const EmployeeList: React.FC<{}> = () => {
                         < Header employee={employee} />
                         < Navigation />
                     </div>
-                    <h1>Employees</h1>
+                    <h1 className="subTitle">Employees</h1>
+
                     <ul>
                         {/* create a list of employees */}
                         {/* filter first and show associates only */}

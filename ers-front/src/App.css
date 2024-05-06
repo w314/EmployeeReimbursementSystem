@@ -32,6 +32,12 @@
   justify-content: flex-start;
 }
 
+.subtitle {
+  font-size: 1.4em;
+  font-weight: 600;
+  margin-right: 30px;
+}
+
 .subTitle {
   font-size: 1.4em;
   font-weight: 400;

@@ -4,7 +4,7 @@ import Reimbursement from "../Reimbursement/Reimbursement";
 import { ReimbursementType, RoleEnum, StatusEnum, EmployeeType, ReimbursementInputType } from "../../Utilities/Types";
 import { useNavigate } from "react-router-dom";
 import InvalidCredentials from "../InvalidCredentials";
-import Employee from "../Employee";
+import Employee from "../Employee/Employee";
 import Header from "../Header/Header";
 import { useLocation } from "react-router-dom";
 import "./ReimbursementList.css"
@@ -98,7 +98,7 @@ const ReimbursementList: React.FC<{}> = () => {
 
             </div> */}
             <div className="subheader">
-                <h2 className="subtitle">Reimbursements</h2>
+                <h2 className="subTitle">Reimbursements</h2>
                 <select className="statusSelect" onChange={handleStatusFilterChange}>
                     <option value="all">All</option>
                     <option value="pending">Pending</option>

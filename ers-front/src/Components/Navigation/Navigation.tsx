@@ -23,7 +23,6 @@ const Navigation: React.FC<{}> = () => {
             <Link to="/reimbursements" state={{employee: employee}}>Reimbursements</Link>
         </span> */}
         <button
-            className="activeButton" 
             onClick={handleReimbursementClick}
         >Reimbursements</button>
         <button onClick={handleEmployeesClick}>Employees</button>
