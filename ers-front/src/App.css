@@ -21,7 +21,15 @@
   display: flex;
   flex-direction: row;
   width: 100%;
+  /* justify-content: space-evenly; */
+}
+
+.spaceEvenly {
   justify-content: space-evenly;
+}
+
+.flexStart {
+  justify-content: flex-start;
 }
 
 .subTitle {

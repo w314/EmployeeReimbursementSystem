@@ -7,6 +7,7 @@ import "./Reimbursement.css"
 import { getEmployee } from "../../Utilities/Utilities";
 import { EmployeeType } from "../../Utilities/Types";
 import Login from "../Login/Login";
+import { formatter } from "../../Utilities/Utilities";
 
 const Reimbursement: React.FC<{
     reimbursement: ReimbursementType,
@@ -42,39 +43,30 @@ const Reimbursement: React.FC<{
         // get id of button where status is stored
         // giving status the type unknown which will be converted later to StatusEnum
         const newStatus: unknown = button.getAttribute("id");
-        // console.log(`Satus of button clicked: ${status}`)
-        // update status on reimbursement by calling the function passed down as props
-        // const updatedReimbursement = {
-        //     ...reimbursement,
-        //     satus: updatedStatus as StatusEnum 
-        // }
-        // console.log(`Updated reimbursement: ${JSON.stringify(updatedReimbursement)}`)
         updateReimbursementStatus(newStatus as StatusEnum)
-        // setReimbursementStatus(status as StatusEnum);
-
     }
 
     return loggedIn
       ? (
         <div className="reimbursement">
             <div  className="details">
-            {/* <span className="rowFlex"> */}
-                    {/* <label htmlFor="status">Status: </label> */}
-                    <p className={`${reimbursement.status} bolder`}>{reimbursement.status.toLocaleUpperCase()}</p>
-                {/* </span> */}
                 <span className="rowFlex" hidden={employee.role == RoleEnum.associate}>
                     {/* <Link to={`${baseUrl}/reimbursements/employees/${reimbursement.employeeId}`}>{reimbursement.employee}</Link> */}
                     <label htmlFor="employee">Submitted By:</label>
                     <span id="employee">{reimbursement.employee}</span>
                 </span>
+                <div className="rowFlex statusAmount">
+                    <span className={`${reimbursement.status} bolder`}>{reimbursement.status.toLocaleUpperCase()}</span>
+                    <span className="amount">{formatter.format(reimbursement.amount)}</span>
+
+                </div>
 
                 <div>
-                    <label htmlFor="description"></label>
+                    {/* <label htmlFor="description"></label> */}
                     <button hidden={employee.role == RoleEnum.manager || reimbursement.status != StatusEnum.pending}>edit</button>
 
                     <span id="description">{reimbursement.description} </span>
                 </div>
-                <p>{reimbursement.amount}</p>
             </div>
             <div className="buttons">
                 <button 
