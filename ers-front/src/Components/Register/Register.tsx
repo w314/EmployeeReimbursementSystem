@@ -1,5 +1,8 @@
 import * as React from "react"
 import Header from "../Header/Header"
+import { baseUrl } from "../../Utilities/Utilities"
+import axios from "axios"
+import { RoleEnum } from "../../Utilities/Types"
 
 const Register: React.FC<{}> = () => {
     
@@ -29,7 +32,18 @@ const Register: React.FC<{}> = () => {
         setLastName(lastName)
     }
 
-    const handleOnRegisterClick = () => {
+    const handleOnRegisterClick = async () => {
+        const url = `${baseUrl}employees`
+        const response  = await axios.post(
+            url,
+            {
+                firstName,
+                lastName,
+                username: userCredentials.username,
+                password: userCredentials.password,
+                role: RoleEnum.associate,
+            }
+        )
 
     }
 

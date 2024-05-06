@@ -36,10 +36,10 @@ public class EmployeeController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> getEmployeeById(@RequestBody EmployeeCreationDTO employee) {
+    public ResponseEntity<EmployeeDTO> getEmployeeById(@RequestBody EmployeeCreationDTO employee) {
 
-        employeeService.addEmployee(employee);
-        return ResponseEntity.accepted().build();
+        EmployeeDTO employeeDTO = employeeService.addEmployee(employee);
+        return ResponseEntity.accepted().body(employeeDTO);
     }
 
     @PostMapping("/login")

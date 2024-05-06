@@ -21,9 +21,11 @@ public class EmployeeService {
     @Autowired
     private Mapper mapper;
 
-    public void addEmployee(EmployeeCreationDTO employeeInput) {
+    public EmployeeDTO addEmployee(EmployeeCreationDTO employeeInput) {
         Employee employee = mapper.toEmployee(employeeInput);
-        employeeRepository.save(employee);
+        Employee addedEmployee = employeeRepository.save(employee);
+        EmployeeDTO addedEmployeeDTO = mapper.toEmployeeDTO(addedEmployee);
+        return addedEmployeeDTO;
     }
 
 
