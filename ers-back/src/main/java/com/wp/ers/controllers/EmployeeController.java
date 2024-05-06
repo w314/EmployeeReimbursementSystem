@@ -1,5 +1,6 @@
 package com.wp.ers.controllers;
 
+import com.wp.ers.DTOs.EmployeeCreationDTO;
 import com.wp.ers.DTOs.EmployeeDTO;
 import com.wp.ers.DTOs.LoginCredentials;
 import com.wp.ers.models.Employee;
@@ -35,10 +36,10 @@ public class EmployeeController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Employee> getEmployeeById(@RequestBody Employee employee) {
+    public ResponseEntity<?> getEmployeeById(@RequestBody EmployeeCreationDTO employee) {
 
-        Employee newEmployee = employeeService.addEmployee(employee);
-        return ResponseEntity.accepted().body(employee);
+        employeeService.addEmployee(employee);
+        return ResponseEntity.accepted().build();
     }
 
     @PostMapping("/login")

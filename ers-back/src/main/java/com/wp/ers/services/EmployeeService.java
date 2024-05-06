@@ -1,5 +1,6 @@
 package com.wp.ers.services;
 
+import com.wp.ers.DTOs.EmployeeCreationDTO;
 import com.wp.ers.DTOs.EmployeeDTO;
 import com.wp.ers.DTOs.Mapper;
 import com.wp.ers.models.Employee;
@@ -20,8 +21,9 @@ public class EmployeeService {
     @Autowired
     private Mapper mapper;
 
-    public Employee addEmployee(Employee employee) {
-        return employeeRepository.save(employee);
+    public void addEmployee(EmployeeCreationDTO employeeInput) {
+        Employee employee = mapper.toEmployee(employeeInput);
+        employeeRepository.save(employee);
     }
 
 

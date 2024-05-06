@@ -43,8 +43,16 @@ public class Employee {
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reimbursement> reimbursements;
 
+    public Employee() {
+    }
 
-
+    public Employee(String firstName, String lastName, String userName, String password, Utilities.Role role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
+    }
 
     public int getEmployeeId() {
         return employeeId;

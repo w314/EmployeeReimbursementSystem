@@ -29,7 +29,7 @@ const Register: React.FC<{}> = () => {
         setLastName(lastName)
     }
 
-    const handleOnClick = () => {
+    const handleOnRegisterClick = () => {
 
     }
 
@@ -53,7 +53,7 @@ const Register: React.FC<{}> = () => {
                     <input type="text" name="username" id="username" onChange={handleUsernameChange} value={userCredentials.username} />
                     <label htmlFor="password">Password</label>
                     <input type="password" id="password" name="password" onChange={handlePasswordChange} value={userCredentials.password}/>
-                    <button onClick={handleOnClick}>Register</button>
+                    <button onClick={handleOnRegisterClick}>Register</button>
 
 
                 </fieldset>

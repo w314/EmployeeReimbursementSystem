@@ -22,6 +22,16 @@ public class Mapper {
         );
     }
 
+    public Employee toEmployee (EmployeeCreationDTO employee) {
+        return new Employee(
+                employee.firstName(),
+                employee.lastName(),
+                employee.userName(),
+                employee.password(),
+                employee.role()
+        );
+    }
+
     public Reimbursement toReimbursement (ReimbursemenCreationtDTO reimbursementInput) {
         return new Reimbursement(
                 reimbursementInput.description(),
