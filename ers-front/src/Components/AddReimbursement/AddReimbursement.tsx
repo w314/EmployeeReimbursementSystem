@@ -9,6 +9,8 @@ import { EmployeeType } from "../../Utilities/Types"
 import { getEmployee } from "../../Utilities/Utilities"
 import Login from "../Login/Login"
 import { ReimbursementType } from "../../Utilities/Types"
+import { formatter } from "../../Utilities/Utilities"
+import "./AddReimbursement.css"
 
 const AddReimbursement: React.FC<{
     handleAddReimbursementSubmit: (reimbusement: ReimbursementType) => void
@@ -27,18 +29,41 @@ const AddReimbursement: React.FC<{
     const loggedIn = sessionStorage.getItem("employeeId")
     const employee: EmployeeType = getEmployee();
 
+
+    const validAmount = (amount: string) => {
+        if(isNaN(Number(amount))) {
+            alert(`Amount has to be a number!`)
+            return false
+        }
+        if(amount == "") {
+            alert('Please enter an amount')
+            return false
+        }
+        return true
+    }
+
+    const validDescription = (description: string) => {
+        if(description.length == 0 ) {
+            alert(`Please enter a description`)
+            return false
+        }
+        return true
+    }
+
     const handleAmoutInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
         const amountEntered = event.target.value;
-        setAmountInput(amountEntered);
+        if(validAmount(amountEntered)) setAmountInput(amountEntered);
     }
 
     const handleDescriptionInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const descriptionEntered= event.target.value;
-        setDescriptionInput(descriptionEntered);
+        if(validDescription(descriptionEntered)) setDescriptionInput(descriptionEntered);
     }
 
 
     const submitReimbursement = async (reimbursement: ReimbursementInputType  ) => {
+        if(!validAmount(amountInput) || !validDescription(descriptionInput)) return;
         const url = `${baseUrl}reimbursements`
         const response = await axios.post(
             url,
@@ -57,6 +82,8 @@ const AddReimbursement: React.FC<{
 
 
     const handleSubmitReimbursement= (event: React.MouseEvent<HTMLButtonElement>) => {
+
+        
         const reimbursement: ReimbursementInputType = {
             amount: parseFloat(amountInput),
             description: descriptionInput,
@@ -85,12 +112,12 @@ const AddReimbursement: React.FC<{
                     value={amountInput.toString()}
                     onChange={handleAmoutInputChange}
                 />
-                <label htmlFor="description"></label>
+                <label htmlFor="descriptionInput"></label>
                 <input 
                     type="text" 
                     tabIndex={2}
                     name="descripton" 
-                    id="description" 
+                    id="descriptionInput" 
                     value={descriptionInput}
                     onChange={handleDescriptionInputChange} 
                 />

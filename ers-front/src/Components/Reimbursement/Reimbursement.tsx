@@ -12,9 +12,12 @@ import { formatter } from "../../Utilities/Utilities";
 const Reimbursement: React.FC<{
     reimbursement: ReimbursementType,
     handleReimbursementUpdate: (updatedReimbursement: ReimbursementType) => void
-}> = ({reimbursement, handleReimbursementUpdate}) => {
+    handleReimbursementDelete: (reimbursementId: number) => void
+}> = ({reimbursement, handleReimbursementUpdate, handleReimbursementDelete}) => {
 
     // const [reimbursemetnStatus, setReimbursementStatus ] = React.useState(status)
+    // const [ editing, setEditing ] = React.useState(false);
+    // const [ description, setDescription ] = React.useState(reimbursement.description)
 
     const navigate = useNavigate();
 
@@ -46,6 +49,28 @@ const Reimbursement: React.FC<{
         updateReimbursementStatus(newStatus as StatusEnum)
     }
 
+    // const handleDescriptionChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+    //     const description = event.target.value
+    //     setDescription(description)
+
+    // // }
+
+    // const handleEditButtonClick = (event:React.MouseEvent<HTMLButtonElement>) => {
+    //     setEditing(!editing)
+    // }
+
+    const deleteReimbursement = async () => {
+        const url = `${baseUrl}reimbursements/${reimbursement.reimbursementId}`
+        await axios.delete(url);
+        handleReimbursementDelete(reimbursement.reimbursementId);
+
+
+    }
+
+    const handleDeletButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        deleteReimbursement();
+    }
+
     return loggedIn
       ? (
         <div className="reimbursement">
@@ -64,7 +89,10 @@ const Reimbursement: React.FC<{
                 <div className="descriptionBlock">
                     <span id="description">{reimbursement.description} </span>
                     {/* <label htmlFor="description"></label> */}
-                    <button hidden={employee.role == RoleEnum.manager || reimbursement.status != StatusEnum.pending}>Edit Description</button>
+                    <button 
+                        hidden={employee.role == RoleEnum.manager || reimbursement.status != StatusEnum.pending}
+                        onClick={handleDeletButtonClick}
+                        >Delete</button>
 
                 </div>
             </div>

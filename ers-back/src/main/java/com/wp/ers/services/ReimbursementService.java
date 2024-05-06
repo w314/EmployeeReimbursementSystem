@@ -86,4 +86,10 @@ public class ReimbursementService {
         return reimbursementDTOs;
 
     }
+
+    public ReimbursementDTO deleteReimbursementById(int reimbursementId) {
+        Reimbursement reimbursement = reimbursementRepository.findById(reimbursementId).get();
+        reimbursementRepository.deleteById(reimbursementId);
+        return mapper.toReimbursementDTO(reimbursement);
+    }
 }

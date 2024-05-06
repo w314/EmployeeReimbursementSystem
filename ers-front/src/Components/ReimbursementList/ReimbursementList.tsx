@@ -68,6 +68,11 @@ const ReimbursementList: React.FC<{}> = () => {
         setReimbursements([...reimbursements, reimbursement])
     }
 
+    const handleReimbursementDelete = (reimbursementId: number) => {
+        const updatedReimbursements  = reimbursements.filter(reimb => reimb.reimbursementId != reimbursementId)
+        setReimbursements(updatedReimbursements)
+    }
+
 
     React.useEffect(() => {
         console.log('fetching reimbursements')
@@ -137,6 +142,7 @@ const ReimbursementList: React.FC<{}> = () => {
                             reimbursement={reimbursement}
                             // send the function to update the reimbursement as prop
                             handleReimbursementUpdate={handleReimbursementUpdate}
+                            handleReimbursementDelete={handleReimbursementDelete}
                          />
                     </li>
                 ))}

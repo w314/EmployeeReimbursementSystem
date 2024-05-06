@@ -64,4 +64,10 @@ public class ReimbursementController {
         ReimbursementDTO reimbursementDTO = reimbursementService.updateReimbursementStatus(reimbursementId, status);
         return ResponseEntity.ok().body(reimbursementDTO);
     }
+
+    @DeleteMapping("/{reimbursementId}")
+    public ResponseEntity<ReimbursementDTO> deletReimbursementById(@PathVariable int reimbursementId) {
+        ReimbursementDTO reimbursementDTO = reimbursementService.deleteReimbursementById(reimbursementId);
+        return ResponseEntity.accepted().body(reimbursementDTO);
+    }
 }
