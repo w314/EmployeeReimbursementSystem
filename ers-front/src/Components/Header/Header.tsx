@@ -17,7 +17,7 @@ const Header: React.FC<{
  
 
         const handleLogoutClick = () => {
-            console.log(`IN HANDLELOGOUT`)
+            // console.log(`IN HANDLELOGOUT`)
             sessionStorage.clear();
             setLoggedOut(true)
     }

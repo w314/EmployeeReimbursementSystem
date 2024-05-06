@@ -13,6 +13,7 @@
     flex-direction: row;
     width: 100%;
     align-items: center;
+    justify-content: space-between;
 
 }
 
@@ -23,16 +24,19 @@
 .spaceBetween {
     justify-content: space-between;
 }
-
+.rowFlex {
+    display: flex;
+    flex-direction: row;
+    /* width: 100%; */
+    align-items: center;
+    /* justify-content: space-evenly; */
+  }
 .subTitle {
     font-size: 1.4em;
     font-weight: 600;
     margin-right: 30px;
 }
 
-div {
-    width: 100%;
-}
 
 .statusSelect {
     padding: 4px;

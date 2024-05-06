@@ -61,11 +61,11 @@ const Reimbursement: React.FC<{
 
                 </div>
 
-                <div>
-                    {/* <label htmlFor="description"></label> */}
-                    <button hidden={employee.role == RoleEnum.manager || reimbursement.status != StatusEnum.pending}>edit</button>
-
+                <div className="descriptionBlock">
                     <span id="description">{reimbursement.description} </span>
+                    {/* <label htmlFor="description"></label> */}
+                    <button hidden={employee.role == RoleEnum.manager || reimbursement.status != StatusEnum.pending}>Edit Description</button>
+
                 </div>
             </div>
             <div className="buttons">

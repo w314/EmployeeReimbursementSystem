@@ -29,11 +29,13 @@ const Login: React.FC<{}> = () => {
     const loginUser = async () => {
 
         const url = `${baseUrl}employees/login`
-        const { data, status } = await axios.post<EmployeeType>(
-            url,
-            {...userCredentials}
-        );
-        
+        try {
+            const { data, status } = await axios.post<EmployeeType>(
+                url,
+                {...userCredentials}
+            );
+
+            
         console.log(JSON.stringify(data, null, 4));        
         console.log(status);
         
@@ -43,6 +45,15 @@ const Login: React.FC<{}> = () => {
         sessionStorage.setItem("role", data.role)
         sessionStorage.setItem("lastName", data.lastName)
         sessionStorage.setItem("firstName", data.firstName)
+        } catch {
+            // if(status == 404 ) {
+                console.log(`INVLAID LOGIN`)
+                alert("Invalid Login Credentials")
+            }
+
+        
+
+
      }
 
 

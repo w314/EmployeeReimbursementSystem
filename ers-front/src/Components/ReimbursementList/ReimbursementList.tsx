@@ -98,6 +98,7 @@ const ReimbursementList: React.FC<{}> = () => {
 
             </div> */}
             <div className="subheader">
+                <div className="rowFlex flexStart alignCenter titleSatus">
                 <h2 className="subTitle">Reimbursements</h2>
                 <select className="statusSelect" onChange={handleStatusFilterChange}>
                     <option value="all">All</option>
@@ -105,6 +106,7 @@ const ReimbursementList: React.FC<{}> = () => {
                     <option value="approved">Approved</option>
                     <option value="denied">Denied</option>
                 </select>
+                </div>
                 <button 
                     className="addreimbursementbutton"
                     hidden={employee.role=="manager"}
