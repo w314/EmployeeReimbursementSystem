@@ -97,15 +97,16 @@ const ReimbursementList: React.FC<{}> = () => {
                 employee={employee}          />
 
             </div> */}
-            <div className="title">
-                <h2>Reimbursements</h2>
-                <select onChange={handleStatusFilterChange}>
+            <div className="subheader">
+                <h2 className="subtitle">Reimbursements</h2>
+                <select className="statusSelect" onChange={handleStatusFilterChange}>
                     <option value="all">All</option>
                     <option value="pending">Pending</option>
                     <option value="approved">Approved</option>
                     <option value="denied">Denied</option>
                 </select>
                 <button 
+                    className="addreimbursementbutton"
                     hidden={employee.role=="manager"}
                     onClick={handleAddReimbursementClick}
                 >

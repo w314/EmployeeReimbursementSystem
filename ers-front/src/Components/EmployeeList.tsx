@@ -39,7 +39,9 @@ const EmployeeList: React.FC<{}> = () => {
         const url = `${baseUrl}employees/${employee.employeeId}`
         const response = axios.delete(url);
 
-        const updatedEmployeeList = employees.filter(employee => employee.employeeId != employee.employeeId)
+        const updatedEmployeeList = employees.filter(emp => emp.employeeId != employee.employeeId)
+        // console.log(`UPDATED EMPLOYEE LIST`)
+        // console.log(JSON.stringify(updatedEmployeeList))
         setEmployees(updatedEmployeeList)
 
     }

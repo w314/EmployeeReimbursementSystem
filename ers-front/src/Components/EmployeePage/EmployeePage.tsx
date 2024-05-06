@@ -8,19 +8,8 @@ import Login from "../Login/Login";
 import { getEmployee } from "../../Utilities/Utilities";
 
 const EmployeePage: React.FC<{}> = () => {
-
-    // const navigate = useNavigate();
-
-    // navigate to login page if user credentials are not populated
-    // if(!sessionStorage.getItem("employeeId")) navigate('/')
-
-    // const loggedInUserId = parseInt(sessionStorage.getItem("employeeId") as string)   
-    // const loggedInUserRole = sessionStorage.getItem("role")
-    // console.log(`ROLE of User: ${loggedInUserRole}`)
     
     const loggedIn = sessionStorage.getItem("employeeId")
-
-
     const employee = getEmployee();
 
 

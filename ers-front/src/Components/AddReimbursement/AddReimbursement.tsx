@@ -14,7 +14,7 @@ const AddReimbursement: React.FC<{
     handleAddReimbursementSubmit: (reimbusement: ReimbursementType) => void
 }> = ({handleAddReimbursementSubmit}) => {
 
-    const [ amountInput, setAmountInput ] = React.useState(0)
+    const [ amountInput, setAmountInput ] = React.useState("")
     const [ descriptionInput, setDescriptionInput ] = React.useState("");
 
     // const location = useLocation();
@@ -29,7 +29,7 @@ const AddReimbursement: React.FC<{
 
     const handleAmoutInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const amountEntered = event.target.value;
-        setAmountInput(parseFloat(amountEntered));
+        setAmountInput(amountEntered);
     }
 
     const handleDescriptionInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +48,7 @@ const AddReimbursement: React.FC<{
         console.log(`REIMBURSEMENT ADDED: ${JSON.stringify(reimbursementAdded)}`)
         
         // clean input fields
-        setAmountInput(0)
+        setAmountInput("")
         setDescriptionInput("")
         handleAddReimbursementSubmit(reimbursementAdded)
 
@@ -58,7 +58,7 @@ const AddReimbursement: React.FC<{
 
     const handleSubmitReimbursement= (event: React.MouseEvent<HTMLButtonElement>) => {
         const reimbursement: ReimbursementInputType = {
-            amount: amountInput,
+            amount: parseFloat(amountInput),
             description: descriptionInput,
             employeeId: employee.employeeId
        }
@@ -77,22 +77,26 @@ const AddReimbursement: React.FC<{
             </div> */}
             <fieldset>
                 <legend> Add New Reimbursement</legend>
-                <label htmlFor="amoutn">Amount: </label>
+                <label htmlFor="amount">Amount: </label>
                 <input 
                     type="text" 
                     id="amount" 
+                    tabIndex={1}
                     value={amountInput.toString()}
                     onChange={handleAmoutInputChange}
                 />
                 <label htmlFor="description"></label>
                 <input 
                     type="text" 
+                    tabIndex={2}
                     name="descripton" 
                     id="description" 
                     value={descriptionInput}
                     onChange={handleDescriptionInputChange} 
                 />
-                <button onClick={handleSubmitReimbursement}>Submit</button>
+                <button
+                    tabIndex={3} 
+                    onClick={handleSubmitReimbursement}>Submit</button>
             </fieldset>
         </>
     )
