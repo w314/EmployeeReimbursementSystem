@@ -9,6 +9,7 @@ import Login from './Components/Login/Login';
 import EmployeePage from './Components/EmployeePage/EmployeePage';
 import Header from './Components/Header/Header';
 import AddReimbursement from './Components/AddReimbursement/AddReimbursement';
+import Register from './Components/Register/Register';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<Login/>}></Route>
           <Route path="/employees" element={<EmployeeList />}></Route>
           <Route path="/reimbursements" element={<ManagerPage />}></Route>
+          <Route path="/register" element={<Register />}></Route>
 {/* +          <Route path="/reimbursements/addReimbursement" element={<AddReimbursement />}></ Route> */}
         </Routes>
       </BrowserRouter>

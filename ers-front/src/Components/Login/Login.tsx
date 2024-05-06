@@ -2,7 +2,7 @@ import * as React from  "react"
 import { baseUrl, fetchData } from "../../Utilities/Utilities"
 import axios from "axios"
 import { RoleEnum, EmployeeType } from "../../Utilities/Types"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import ManagerPage from "../ManagerPage"
 import EmployeePage from "../EmployeePage/EmployeePage"
 import Header from "../Header/Header"
@@ -57,13 +57,14 @@ const Login: React.FC<{}> = () => {
         loginUser();      
     }
 
+ 
 
     // if the user is not logged in a login page is rendered
     return loggedInUser.employeeId == null
         ? (
             <div className="content">
                 <div className="header textLeft">
-                < Header employee={null} />
+                < Header />
 
                 </div>
                 <div>
@@ -79,6 +80,7 @@ const Login: React.FC<{}> = () => {
                         </fieldset>
                     {/* </form> */}
                 </div>
+
 
 
             </div>

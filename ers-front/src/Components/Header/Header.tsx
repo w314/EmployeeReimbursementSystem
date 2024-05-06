@@ -2,10 +2,12 @@ import * as React from "react"
 import './Header.css'
 import { EmployeeType, RoleEnum } from "../../Utilities/Types";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header: React.FC<{
-    employee: EmployeeType | null
-}> = ({employee}) => {
+    employee?: EmployeeType,
+    registerShown?: boolean
+}> = ({employee, registerShown}) => {
 
     const [loggedOut, setLoggedOut ] = React.useState(employee == null);
 
@@ -21,7 +23,7 @@ const Header: React.FC<{
     }
 
     React.useEffect(() => {
-        if(loggedOut) {
+        if(loggedOut && !registerShown) {
             navigate('/')
         }
 
@@ -35,6 +37,10 @@ const Header: React.FC<{
                 onClick={handleLogoutClick}
                 hidden={loggedOut}
             >Logout</button>
+            <button 
+                hidden={!loggedOut || registerShown}
+                className="registerButton"
+            ><Link to="/register">Register</Link></button>
         </div>
 
     )
