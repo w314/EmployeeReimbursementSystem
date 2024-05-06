@@ -57,5 +57,12 @@ public class EmployeeService {
 
     }
 
+    public EmployeeDTO findEmployeeByUsername (String username) {
+        Employee employee = employeeRepository.findByUserName(username);
+        if(employee == null) return null;
+        EmployeeDTO employeeDTO = mapper.toEmployeeDTO(employee);
+        return employeeDTO;
+    }
+
 
 }

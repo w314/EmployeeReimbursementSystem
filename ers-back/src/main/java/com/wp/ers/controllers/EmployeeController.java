@@ -65,4 +65,14 @@ public class EmployeeController {
         return ResponseEntity.accepted().build();
     }
 
+    @GetMapping("/username/{username}")
+    public ResponseEntity<EmployeeDTO> getEmployeeByUserName (@PathVariable String username) {
+        EmployeeDTO employeeDTO = employeeService.findEmployeeByUsername(username);
+        if(employeeDTO == null) {
+            return ResponseEntity.status(404).build();
+        }
+        return ResponseEntity.ok().body(employeeDTO);
+
+    }
+
 }

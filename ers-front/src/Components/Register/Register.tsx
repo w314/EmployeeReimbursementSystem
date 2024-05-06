@@ -4,6 +4,7 @@ import { baseUrl } from "../../Utilities/Utilities"
 import axios from "axios"
 import { EmployeeType, RoleEnum } from "../../Utilities/Types"
 import { useNavigate } from "react-router-dom"
+import { validateHeaderName } from "http"
 
 const Register: React.FC<{}> = () => {
     
@@ -34,7 +35,31 @@ const Register: React.FC<{}> = () => {
         setLastName(lastName)
     }
 
-    const handleOnRegisterClick = async () => {
+    const validUserInput = () => {
+        if(userCredentials.username == "") return false
+        if(userCredentials.password == "") return false
+        if(firstName == "") return false
+        if(lastName == "") return false
+        return true
+    }
+
+    const uniqueUserName = async () =>  {
+        const url = `${baseUrl}employees/username/${userCredentials.username}`
+        console.log(`CHECKING USERNAME AT URL: ${url}`)
+        try {
+            const {data } = await axios(url);
+            console.log(`data returned at username check: ${JSON.stringify(data)}`)
+            // if(status == 404) return false
+            return false
+        } catch {
+            return true
+        }
+
+        // return true
+
+    }
+
+    const registerEmployee = async () => {
         const url = `${baseUrl}employees`
         const response  = await axios.post(
             url,
@@ -52,14 +77,33 @@ const Register: React.FC<{}> = () => {
         console.log(JSON.stringify(employee))
 
         navigate("/")
-
-
-
-
     }
 
 
-    console.log(`IN REGISTER COMP`)
+    const handleOnRegisterClick = async () => {
+
+        if(!validUserInput()) {
+            alert(`Please fill out all fields to register`)
+            return
+        }
+
+        console.log(`ALL FIELDS HAVE VALUES`)
+        const isUserNameUnique =  await uniqueUserName()
+        // console.log(`Username is unique? ${isUserNameUnique}`)
+
+        if(!isUserNameUnique) {
+            
+            alert(`Please choose a unique username`)
+            return
+        }
+
+        console.log(`WE HAVE UNIQUE USERNAME`)
+
+        registerEmployee()
+    }
+
+
+    // console.log(`IN REGISTER COMP`)
     return (
         <div className="content">
         <div className="header textLeft">
