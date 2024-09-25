@@ -1,0 +1,32 @@
+create schema ers;
+use ers;
+
+drop table employee;
+
+create table employee(
+    employee_id int primary key,
+    first_name varchar(50),
+    last_name varchar(50),
+    user_name varchar(50),
+    password varchar(50),
+    role varchar(20)
+);
+
+insert into employee values(1, 'bob', 'bob', 'bob', 'pass', 'user');
+insert into employee values(2, 'bobek', 'bobek', 'bobek', 'pass', 'admin');
+
+
+drop table reimbursement;
+
+create table reimbursement(
+    reimbursement_id int primary key,
+    description varchar(100),
+    amount float,
+    status varchar(20),
+    employee_id int references employee(employee_id)
+);
+
+
+insert into reimbursement values(1, 'important item', 9.67, 'submitted', 1);
+insert into reimbursement values(2, 'not so important item', 2.45, 'submitted', 1);
+commit;
